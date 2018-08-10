@@ -50,15 +50,14 @@ class GroupControllerClass {
     }
 
     public async get(req: Request, res: Response) {
+        console.log("!!!!!!!!!!!!!");
         // TODO: Show only groups the user can see (as member or open groups)
         const group = await Repo(Group).findOne(req.params.id);
         if (group) {
-            if (req.user.isLoggedIn) {
-                const userId = req.user.id;
-                const groupId = req.params.id;
-                const connection = await Repo(Member).findOne({user: userId, group: groupId});
-                group.isMember = !!connection;
-            }
+            const userId = req.user.id;
+            const groupId = req.params.id;
+            const connection = await Repo(Member).findOne({user: userId, group: groupId});
+            group.isMember = !!connection;
             res.json(group);
         } else {
             res.status(404).send();

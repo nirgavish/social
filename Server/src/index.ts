@@ -14,6 +14,7 @@ import {SessionStore} from "./lib/appBlocks/sessionStore";
 
 // Middleware
 import {Permissions} from "./lib/middleware/permissions";
+import {WalledGarden} from "./lib/middleware/walledGarden";
 
 // Routes
 import {Routes} from "./routes";
@@ -27,6 +28,7 @@ createConnection().then(async (connection) => {
     app.use(Cors);
     app.use(SessionStore);
     app.use(Permissions);
+    app.use(WalledGarden);
     Mount(app, Routes);
 
     app.listen(5555);

@@ -46,7 +46,7 @@ import {PostService} from '../services/post.service';
           </ng-template>
 
         </div>
-        <div *ngIf="post.user.id===authService.identity.id" class="mr-2">
+        <div *ngIf="authService.identity && (post.user.id===authService.identity.id)" class="mr-2">
           <div class="dropdown">
             <button type="button" class="btn btn-sm btn-basic dropdown-toggle float-right"
                     data-toggle="dropdown"></button>
