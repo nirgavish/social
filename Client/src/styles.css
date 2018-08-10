@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  overflow-y: scroll;
+}
+
+.img-sz-1 {
+  width:1em;
+  height:1em;
+}
+
+.img-sz-2 {
+  width:2em;
+  height:2em;
+}
+
+.img-sz-3 {
+  width:3em;
+  height:3em;
+}
+
+.img-sz-4 {
+  width:4em;
+  height:4em;
+}
