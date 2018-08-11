@@ -14,7 +14,6 @@ export class Notification {
     @PrimaryGeneratedColumn("uuid")
     public id: string;
 
-    // TODO: convert to @CreateDateColumn() (look into 'special columns': http://typeorm.io/#/entities/entity-columns
     @CreateDateColumn()
     public dateCreated: Date;
 

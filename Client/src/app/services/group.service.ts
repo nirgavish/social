@@ -34,6 +34,14 @@ export class GroupService {
     });
   }
 
+  getMembers(groupId) {
+    return new Promise((resolve, reject) => {
+      this.http.get(APIURL + `group/${groupId}/members`, {withCredentials: true}).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
   getFeed(groupId) {
     return new Promise((resolve, reject) => {
       this.http.get(APIURL + `group/${groupId}/feed`, {withCredentials: true}).subscribe((res) => {

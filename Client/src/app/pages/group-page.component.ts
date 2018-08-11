@@ -20,12 +20,40 @@ import {GroupService} from '../services/group.service';
                 {{groupObject.description}}
                 <!--{{groupObject | json}}-->
               </p>
-              <p>Admins: </p>
-              <p>Members: </p>
 
+              <p>Founder: </p>
+              <ng-container *ngFor="let member of groupMembers">
+                <a *ngIf="member.memberType===0" class="small font-weight-bold" [routerLink]="['/user/'+member.user.id]"
+                   title="{{member.user.name}}">
+                  <app-user-avatar class="mr-1 mb-1 img-sz-2" [user]="member.user"></app-user-avatar>
+                </a>
+              </ng-container>
+
+              <p>Admins: </p>
+              <ng-container *ngFor="let member of groupMembers">
+                <a *ngIf="member.memberType===1" class="small font-weight-bold" [routerLink]="['/user/'+member.user.id]"
+                   title="{{member.user.name}}">
+                  <app-user-avatar class="mr-1 mb-1 img-sz-2" [user]="member.user"></app-user-avatar>
+                </a>
+              </ng-container>
+
+              <p>Members: </p>
+              <ng-container *ngFor="let member of groupMembers">
+                <a *ngIf="member.memberType===2" class="small font-weight-bold" [routerLink]="['/user/'+member.user.id]"
+                   title="{{member.user.name}}">
+                  <app-user-avatar class="mr-1 mb-1 img-sz-2" [user]="member.user"></app-user-avatar>
+                </a>
+              </ng-container>
+
+              <hr/>
               <a (click)="join()" *ngIf="!groupObject.isMember" href="javascript:;" class="btn btn-primary">Join</a>
               <a (click)="leave()" *ngIf="groupObject.isMember" href="javascript:;" class="btn btn-secondary">Leave</a>
 
+<!--
+              <hr/>
+
+              <pre>{{groupMembers | json}}</pre>
+-->
             </div>
           </div>
 
@@ -46,6 +74,7 @@ import {GroupService} from '../services/group.service';
 })
 
 export class GroupPageComponent implements OnInit {
+  groupMembers: {};
   groupFeed: Object;
   private groupId: any;
   private groupObject: Object;
@@ -68,11 +97,16 @@ export class GroupPageComponent implements OnInit {
       this.groupId = params.id;
       this.getGroup(params.id);
       this.getFeed(params.id);
+      this.getMembers(params.id);
     });
   }
 
   async getFeed(groupId) {
     this.groupFeed = await this.groupService.getFeed(groupId);
+  }
+
+  async getMembers(groupId) {
+    this.groupMembers = await this.groupService.getMembers(groupId);
   }
 
   async getGroup(groupId) {

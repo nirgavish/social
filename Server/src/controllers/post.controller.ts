@@ -106,6 +106,9 @@ class PostControllerClass {
 
     public async addComment(req, res) {
         // TODO: Everything in this function should be a transaction
+        // https://github.com/typeorm/typeorm/blob/master/docs/transactions.md
+        // https://github.com/typeorm/typeorm/blob/master/docs/many-to-many-relations.md
+        // https://github.com/typeorm/typeorm/issues/1030
 
         const post = await Repo(Post).findOne(req.params.id);
 

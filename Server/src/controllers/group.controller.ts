@@ -45,12 +45,14 @@ class GroupControllerClass {
     }
 
     public async getMembers(req: Request, res: Response) {
-        // TODO: Never tested
-        res.json(await Repo(Member).findOne({where: {group: req.params.id}, relations: ["user"]}));
+        const members = await Repo(Member).find({where: {group: req.params.id}, relations: ["user"]});
+        members.forEach((m) => {
+            m.user = User.stripBeforeSend(m.user);
+        });
+        res.json(members);
     }
 
     public async get(req: Request, res: Response) {
-        console.log("!!!!!!!!!!!!!");
         // TODO: Show only groups the user can see (as member or open groups)
         const group = await Repo(Group).findOne(req.params.id);
         if (group) {
@@ -89,14 +91,10 @@ class GroupControllerClass {
         } else {
             res.status(401).send();
         }
-        // TODO: Attach creator as Admin through 'members'
-        // https://github.com/typeorm/typeorm/blob/master/docs/transactions.md
-        // https://github.com/typeorm/typeorm/blob/master/docs/many-to-many-relations.md
-        // https://github.com/typeorm/typeorm/issues/1030
     }
 
     public patch(req: Request, res: Response) {
-        // TODO: Implement
+        // TODO: Implement patch group
         res.status(501).send();
     }
 
