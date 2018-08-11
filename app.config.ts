@@ -1,9 +1,9 @@
 export const Config = {
 
     /*
-    Content is available only to logged-in users
+    When set to true, content is available only to logged-in users
     */
-    // TODO: Implement walledGarden
+    // TODO: Implement walledGarden middleware, still buggy
     walledGarden: false,
 
     /*

@@ -19,16 +19,18 @@ import {WalledGarden} from "./lib/middleware/walledGarden";
 // Routes
 import {Routes} from "./routes";
 
-const app = express();
-app.use(bodyParser.json());
-
 createConnection().then(async (connection) => {
 
-    app["connection"] = connection;
+    const app = express();
+
+    app.use(bodyParser.json());
     app.use(Cors);
     app.use(SessionStore);
+
+    app["connection"] = connection;
     app.use(Permissions);
     app.use(WalledGarden);
+
     Mount(app, Routes);
 
     app.listen(5555);

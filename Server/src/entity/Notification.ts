@@ -5,7 +5,7 @@ import {User} from "./User";
 export enum ActivityType {
     PUBLISHED = 0,
     COMMENTED_ON = 1,
-    LIKED = 2,
+    LIKED = 2, // TODO: Implement likes
 }
 
 @Entity()

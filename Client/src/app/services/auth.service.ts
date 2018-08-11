@@ -39,9 +39,8 @@ export class AuthService {
   }
 
   logout() {
-    this.http.delete(APIURL + 'auth/logout', {withCredentials: true}).subscribe(() => {
-      this.identity = null;
-      this.isLoggedIn = false;
-    });
+    this.identity = null;
+    this.isLoggedIn = false;
+    this.http.delete(APIURL + 'auth/logout', {withCredentials: true}).subscribe(() => {});
   }
 }

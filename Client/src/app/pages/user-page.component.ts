@@ -18,11 +18,11 @@ import {UserService} from '../services/user.service';
                 {{userObject.name}}
               </h1>
               <div class="card-text">
+                <h6>Followers: <b>{{userObject.followerCount}}</b></h6>
+                <h6>Following: <b>{{userObject.followingCount}}</b></h6>
+                <h6>Public Groups</h6>
                 <pre>{{userObject | json}}</pre>
               </div>
-              <h6>Followers</h6>
-              <h6>Following</h6>
-              <h6>Public Groups</h6>
 
               <ng-container *ngIf="userCanBeFollowed()">
                 <a (click)="unfollow()" *ngIf="userObject.following" href="javascript:;" class="btn btn-secondary">Unfollow</a>

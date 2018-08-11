@@ -57,6 +57,8 @@ class UserControllerClass {
         }
         const user = await Repo(User).findOne(req.params.id);
         if (user) {
+            user.followerCount = await Repo(Follow).count({where: {following: user.id}});
+            user.followingCount = await Repo(Follow).count({where: {follower: user.id}});
             if (req.user.isLoggedIn) {
                 const follower = req.user.id;
                 const following = req.params.id;
