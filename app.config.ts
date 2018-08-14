@@ -1,4 +1,5 @@
 export const Config = {
+    // TODO: Change to env file
 
     /*
     When set to true, content is available only to logged-in users
