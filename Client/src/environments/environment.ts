@@ -3,10 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiurl: 'http://localhost:5555/',
 };
-
-export const APIURL = 'http://localhost:5555/';
 
 /*
  * In development mode, to ignore zone related error stack frames such as

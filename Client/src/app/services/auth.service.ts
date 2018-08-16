@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {APIURL} from '../../environments/environment';
+import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class AuthService {
   isLoggedIn: boolean;
 
   constructor(private http: HttpClient) {
-    this.http.get(APIURL + 'auth/identity', {withCredentials: true}).subscribe(
+    this.http.get(environment.apiurl + 'auth/identity', {withCredentials: true}).subscribe(
       (res) => {
         this.identity = res;
         this.isLoggedIn = true;
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   login(email: any, password: any) {
-    this.http.post(APIURL + 'auth/login', {email, password}, {withCredentials: true}).subscribe(
+    this.http.post(environment.apiurl + 'auth/login', {email, password}, {withCredentials: true}).subscribe(
       (res) => {
         this.identity = res;
         this.isLoggedIn = true;
@@ -41,6 +41,6 @@ export class AuthService {
   logout() {
     this.identity = null;
     this.isLoggedIn = false;
-    this.http.delete(APIURL + 'auth/logout', {withCredentials: true}).subscribe(() => {});
+    this.http.delete(environment.apiurl + 'auth/logout', {withCredentials: true}).subscribe(() => {});
   }
 }

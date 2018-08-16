@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {APIURL} from '../../environments/environment';
+import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class UserService {
 
   get(userId) {
     return new Promise((resolve, reject) => {
-      this.http.get(APIURL + `user/${userId}`, {withCredentials: true}).subscribe((res) => {
+      this.http.get(environment.apiurl + `user/${userId}`, {withCredentials: true}).subscribe((res) => {
         resolve(res);
       });
     });
@@ -19,7 +19,7 @@ export class UserService {
 
   getFeed(userId) {
     return new Promise((resolve, reject) => {
-      this.http.get(APIURL + `user/${userId}/feed`, {withCredentials: true}).subscribe((res) => {
+      this.http.get(environment.apiurl + `user/${userId}/feed`, {withCredentials: true}).subscribe((res) => {
         resolve(res);
       });
     });
@@ -27,7 +27,7 @@ export class UserService {
 
   follow(userId) {
     return new Promise((resolve, reject) => {
-      this.http.post(APIURL + 'user/' + userId + '/follow', {}, {withCredentials: true}).subscribe((res) => {
+      this.http.post(environment.apiurl + 'user/' + userId + '/follow', {}, {withCredentials: true}).subscribe((res) => {
         resolve(res);
       });
     });
@@ -35,7 +35,7 @@ export class UserService {
 
   unfollow(userId) {
       return new Promise((resolve, reject) => {
-        this.http.delete(APIURL + 'user/' + userId + '/follow', {withCredentials: true}).subscribe((res) => {
+        this.http.delete(environment.apiurl + 'user/' + userId + '/follow', {withCredentials: true}).subscribe((res) => {
           resolve(res);
         });
       });
