@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {Config} from "../../../app.config";
+// import {Config} from "../../environments/dev.env";
 import {Follow} from "../entity/Follow";
 import {Post} from "../entity/Post";
 import {User, UserRoles} from "../entity/User";
@@ -32,7 +32,7 @@ class UserControllerClass {
     }
 
     public async feed(req: Request, res: Response) {
-        if (Config.walledGarden && !req.user.isLoggedIn) {
+        if (process.env.walledGarden && !req.user.isLoggedIn) {
             res.status(401).send();
             return;
         }
@@ -51,7 +51,7 @@ class UserControllerClass {
     }
 
     public async get(req: Request, res: Response) {
-        if (Config.walledGarden && !req.user.isLoggedIn) {
+        if (process.env.walledGarden && !req.user.isLoggedIn) {
             res.status(401).send();
             return;
         }
@@ -81,7 +81,7 @@ class UserControllerClass {
     }
 
     public async post(req: Request, res: Response) {
-        if (Config.walledGarden && !req.user.isLoggedIn) {
+        if (process.env.walledGarden && !req.user.isLoggedIn) {
             res.status(401).send();
             return;
         }

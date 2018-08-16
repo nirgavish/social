@@ -1,3 +1,7 @@
+// Environment
+import * as dotenv from "dotenv";
+dotenv.config({path: "environments/.env"});
+
 // Express
 import * as express from "express";
 
@@ -19,7 +23,29 @@ import {WalledGarden} from "./lib/middleware/walledGarden";
 // Routes
 import {Routes} from "./routes";
 
-createConnection().then(async (connection) => {
+createConnection({
+    type: "mysql",
+    host: process.env.db_host,
+    port: Number(process.env.db_port),
+    username: process.env.db_username,
+    password: process.env.db_password,
+    database: process.env.db_database,
+    synchronize: true,
+    entities: [
+        "src/entity/*.ts",
+    ],
+    subscribers: [
+        "src/subscriber/*.ts",
+    ],
+    migrations: [
+        "src/migration/*.ts",
+    ],
+    cli: {
+        entitiesDir: "src/entity",
+        migrationsDir: "src/migration",
+        subscribersDir: "src/subscriber",
+    },
+}).then(async (connection) => {
 
     const app = express();
 
@@ -33,7 +59,7 @@ createConnection().then(async (connection) => {
 
     Mount(app, Routes);
 
-    app.listen(5555);
-    console.log("Server is up and running on port 5555");
+    app.listen(process.env.server_port);
+    console.log(`Server is up and running on port ${process.env.server_port}`);
 
 }).catch((error) => console.log("TypeORM connection error: ", error));
