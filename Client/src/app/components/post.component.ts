@@ -20,7 +20,11 @@ import {PostService} from '../services/post.service';
           <a [routerLink]="['/post/' + post.id]">
             <div class="small text-muted">{{post.dateCreated}}</div>
           </a>
-          {{post.body}}
+
+          <div>
+            <span [innerHTML]="postBody()"></span>
+            <a class="text-nowrap small" href="javascript:;" (click)="extendTextView()" *ngIf="!postPageMode && post.body.length>200"> Read More...</a>
+          </div>
 
           <ng-container *ngIf="!post.comments; else fullComments">
             <div *ngIf="post.commentCount>1" class="mt-3 small">
@@ -28,7 +32,8 @@ import {PostService} from '../services/post.service';
                 {{post.commentCount - 1}} More Comment<span *ngIf="post.commentCount>2">s</span>...
               </a>
             </div>
-            <app-comment *ngIf="post.lastComment" [post]="post" (deleteEvent)="refreshPost()" [comment]="post.lastComment"></app-comment>
+            <app-comment *ngIf="post.lastComment" [post]="post" (deleteEvent)="refreshPost()"
+                         [comment]="post.lastComment"></app-comment>
           </ng-container>
 
           <ng-template #fullComments>
@@ -61,17 +66,34 @@ import {PostService} from '../services/post.service';
   `,
 })
 export class PostComponent implements OnInit {
+  extended: any;
   deleted: boolean;
   comments: Object = null;
 
   @Input() post;
-  @Input() extended?: boolean;
+  @Input() postPageMode?: boolean;
+  private fullTextView: boolean;
+  private extendTextViewClicked: boolean;
 
   constructor(private authService: AuthService, private cd: ChangeDetectorRef, private postService: PostService) {
   }
 
+  extendTextView() {
+    this.postPageMode = true;
+  }
+
+  postBody() {
+    if ( this.postPageMode || this.post.body.length < 200) {
+      return this.post.body;
+    } else {
+      const tmp = document.createElement('DIV');
+      tmp.innerHTML = this.post.body.substring(0, 200);
+      return tmp.textContent || tmp.innerText || '';
+    }
+  }
+
   ngOnInit() {
-    if (this.extended) {
+    if (this.extended || this.postPageMode) {
       this.getExtendedComments();
     }
   }
@@ -82,7 +104,7 @@ export class PostComponent implements OnInit {
   }
 
   async refreshPost() {
-    console.warn('REFRESH POST')
+    console.warn('REFRESH POST');
     this.post = await this.postService.get(this.post.id);
     this.deleted = true;
     this.cd.detectChanges();

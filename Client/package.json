@@ -16,8 +16,10 @@
     "@angular/platform-browser": "^6.0.0",
     "@angular/platform-browser-dynamic": "^6.0.0",
     "@angular/router": "^6.0.0",
+    "angular2-medium-editor": "^1.2.0",
     "core-js": "^2.5.4",
     "md5": "^2.2.1",
+    "medium-editor": "^5.23.3",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

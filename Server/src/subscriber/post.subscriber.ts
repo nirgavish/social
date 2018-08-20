@@ -26,6 +26,7 @@ export class PostSubscriber implements EntitySubscriberInterface<Post> {
                         activity: ActivityType.PUBLISHED,
                         subject: post.user,
                         post,
+                        groupId: post.group,
                         seen: false,
                     };
                     messages.push(newNotification);

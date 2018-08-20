@@ -4,6 +4,7 @@ import {Member, MemberType} from "../entity/Member";
 import {Post} from "../entity/Post";
 import {User} from "../entity/User";
 import {Repo} from "../lib/repos";
+import {Notification} from "../entity/Notification";
 
 class GroupControllerClass {
 
@@ -15,17 +16,32 @@ class GroupControllerClass {
     ];
 
     public async joinLeave(req: Request, res: Response) {
-        // TODO: On leave, remove notifications from user's activity stream
         // TODO: More complex flows to joining (admin confirmations, invites, etc.)
         if (req.user.isLoggedIn) {
             const memberConnection = {user: req.user.id, group: req.params.id };
             const connection = await Repo(Member).findOne(memberConnection);
+
             try {
+
                 if (!connection && req.method === "POST") {
                     memberConnection["memberType"] = MemberType.REGULAR;
                     await Repo(Member).save(memberConnection);
                 }
-                if (connection && req.method === "DELETE") { await Repo(Member).delete(memberConnection); }
+                if (connection && req.method === "DELETE") {
+
+                    await Repo(Member).delete(memberConnection);
+
+                    const allNotifications = await Repo(Notification).find({
+                        relations: ["recipient"],
+                        where: {
+                            recipient: req.user.id,
+                            groupId: req.params.id,
+                        },
+                    });
+
+                    Repo(Notification).delete(allNotifications);
+
+                }
                 res.status(200).send();
             } catch (e) {
                 res.status(500).send(e);

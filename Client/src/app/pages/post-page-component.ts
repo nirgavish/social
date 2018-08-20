@@ -12,7 +12,7 @@ import {PostService} from "../services/post.service";
 
       <div class="col-9">
         <div class="mb-5" *ngIf="post">
-          <app-post [extended]="true" [post]="post"></app-post>
+          <app-post [postPageMode]="true" [post]="post"></app-post>
         </div>
       </div>
 

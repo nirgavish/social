@@ -2,6 +2,7 @@ export function Mount(app, controllers) {
     controllers.forEach((c) => {
 
         console.log(c.controller.constructor.name);
+
         if (c.controller.get) {
             console.log(c.route + "[get/:id]");
             app.get(c.route + "/:id", (req, res) => c.controller.get(req, res));
@@ -29,17 +30,5 @@ export function Mount(app, controllers) {
             });
         }
 
-/*
-        try {
-            c.controller.init();
-            console.log(c.controller.constructor.name, "initialized");
-        } catch(e) {
-            console.log("No init() on", c.controller.constructor.name);
-        }
-*/
-        console.log("");
-
     });
 }
-
-

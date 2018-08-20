@@ -4,6 +4,7 @@ import {Request, Response} from "express";
 export function WalledGarden(req: Request, res: Response, next) {
     // TODO: Can't logout when walledGarden set to true
 
+/*
     if (process.env.walledGarden && !req.user.isLoggedIn) {
         if(req.originalUrl !== "/auth/login") {
             res.status(401).end();
@@ -14,5 +15,6 @@ export function WalledGarden(req: Request, res: Response, next) {
     } else {
         next();
     }
-
+*/
+next();
 }

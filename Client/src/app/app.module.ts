@@ -22,6 +22,8 @@ import {PostService} from './services/post.service';
 import {GroupService} from './services/group.service';
 import {UserService} from './services/user.service';
 
+import { MediumEditorDirective } from 'angular2-medium-editor';
+
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomePageComponent},
   {path: 'user/:id', pathMatch: 'full', component: UserPageComponent},
@@ -43,7 +45,8 @@ const routes: Routes = [
     GroupPageComponent,
     GroupsPageComponent,
     PostPageComponent,
-    UserAvatarComponent
+    UserAvatarComponent,
+    MediumEditorDirective,
   ],
   imports: [
     BrowserModule,

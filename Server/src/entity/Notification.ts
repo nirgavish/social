@@ -32,4 +32,7 @@ export class Notification {
     @Column()
     public seen: boolean;
 
+    @Column({ nullable: true })
+    public groupId: string;
+
 }

@@ -24,6 +24,8 @@
             ],
             "styles": [
               "src/styles/yeti.css",
+              "node_modules/medium-editor/dist/css/medium-editor.css",
+              "node_modules/medium-editor/dist/css/themes/bootstrap.css",
               "src/styles.css"
             ],
             "scripts": []
