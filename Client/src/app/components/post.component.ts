@@ -7,10 +7,21 @@ import {PostService} from '../services/post.service';
   selector: 'app-post',
   template: `
     <ng-container *ngIf="!deleted">
+
       <div class="media">
 
         <app-user-avatar class="mr-3 img-sz-4" [user]="post.user"></app-user-avatar>
         <div class="media-body">
+          <div *ngIf="authService.identity && (post.user.id===authService.identity.id)" class="float-right">
+            <div class="dropdown">
+              <button type="button" class="btn btn-sm btn-basic dropdown-toggle"
+                      data-toggle="dropdown"></button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="javascript:;" (click)="deletePost()">Delete</a>
+              </div>
+            </div>
+          </div>
+
           <a class="small font-weight-bold" [routerLink]="['/user/'+post.user.id]">{{post.user.name}}</a>
           <span class="small" *ngIf="post.group">
           <i class="fa fa-caret-right mr-1 ml-1"></i>
@@ -51,17 +62,9 @@ import {PostService} from '../services/post.service';
           </ng-template>
 
         </div>
-        <div *ngIf="authService.identity && (post.user.id===authService.identity.id)" class="mr-2">
-          <div class="dropdown">
-            <button type="button" class="btn btn-sm btn-basic dropdown-toggle float-right"
-                    data-toggle="dropdown"></button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="javascript:;" (click)="deletePost()">Delete</a>
-            </div>
-          </div>
-        </div>
+
+
       </div>
-      <hr class="mt-5"/>
     </ng-container>
   `,
 })
@@ -104,7 +107,6 @@ export class PostComponent implements OnInit {
   }
 
   async refreshPost() {
-    console.warn('REFRESH POST');
     this.post = await this.postService.get(this.post.id);
     this.deleted = true;
     this.cd.detectChanges();

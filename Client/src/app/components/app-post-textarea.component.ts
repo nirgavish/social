@@ -5,7 +5,7 @@ import {PostService} from '../services/post.service';
 @Component({
   selector: 'app-post-textarea',
   template: `
-    <div class="mb-4" *ngIf="authService.identity">
+    <div class="mb-2 shadow p-2 card" *ngIf="authService.identity">
       <!--<textarea [(ngModel)]="postValue" class="container"></textarea>-->
       <div class="card">
         <medium-editor [(editorModel)]="postValue"
@@ -29,7 +29,6 @@ export class PostTextareaComponent implements OnInit {
   @Output() postEvent = new EventEmitter<any>();
 
   async submitPost() {
-    console.log({body: this.postValue, group: this.groupId});
     await this.postService.create({body: this.postValue, group: this.groupId});
     this.postValue = '';
     this.postEvent.emit();

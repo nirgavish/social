@@ -7,16 +7,14 @@ import {PostService} from "../services/post.service";
   template: `
     <div class="row">
 
-      <div class="col-3">
+      <div class="col-4">
       </div>
 
-      <div class="col-9">
-        <div class="mb-5" *ngIf="post">
+      <div class="col-8">
+        <div class="mb-2 card p-2 shadow-sm" *ngIf="post">
           <app-post [postPageMode]="true" [post]="post"></app-post>
         </div>
       </div>
-
-      <div class="col-3"></div>
 
     </div>
 `

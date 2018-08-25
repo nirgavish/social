@@ -7,7 +7,7 @@ import {AuthService} from '../services/auth.service';
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top mb-3">
       <div class="container">
-        <a class="navbar-brand" [routerLink]="['']"><i class="fa fa-anchor mr-1"></i></a>
+        <a class="navbar-brand" [routerLink]="['']">Q</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

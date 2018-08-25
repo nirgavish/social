@@ -8,7 +8,7 @@ import {GroupService} from '../services/group.service';
   template: `
     <div class="row">
 
-      <div class="col-3">
+      <div class="col-4">
         <div *ngIf="authService.identity">
 
           <ul class="list-group mb-2">
@@ -38,9 +38,9 @@ import {GroupService} from '../services/group.service';
         </div>
       </div>
 
-      <div class="col-9">
+      <div class="col-8">
         <app-post-textarea (postEvent)="refreshFeed()"></app-post-textarea>
-        <div class="mb-5" *ngFor="let post of feed">
+        <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of feed">
           <app-post [post]="post"></app-post>
         </div>
       </div>

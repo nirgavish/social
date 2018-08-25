@@ -8,7 +8,7 @@ import {GroupService} from '../services/group.service';
     <ng-container>
 
       <div class="row">
-        <div class="col-3">
+        <div class="col-4">
 
           <div class="card" *ngIf="groupObject">
             <!--<img class="card-img-top" src="https://www.gravatar.com/avatar/35d5f0fd-c65a-4275-9442-2f9029e20211?d=retro" alt="Card image cap">-->
@@ -58,11 +58,11 @@ import {GroupService} from '../services/group.service';
           </div>
 
         </div>
-        <div class="col-9">
+        <div class="col-8">
 
           <app-post-textarea (postEvent)="getFeed(groupId)" [groupId]="groupId"></app-post-textarea>
 
-          <div class="mb-5" *ngFor="let post of groupFeed">
+          <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of groupFeed">
             <app-post [post]="post"></app-post>
           </div>
 

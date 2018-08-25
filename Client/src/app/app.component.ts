@@ -11,7 +11,6 @@ import {AuthService} from './services/auth.service';
       <div class="container">
         <router-outlet></router-outlet>
       </div>
-      <!--<app-style-switcher></app-style-switcher>-->
     </ng-container>
   `
 })

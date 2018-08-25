@@ -9,7 +9,7 @@ import {UserService} from '../services/user.service';
     <ng-container>
 
       <div class="row">
-        <div class="col-3">
+        <div class="col-4">
 
           <div class="card" *ngIf="userObject">
             <app-user-avatar class="card-img-top" [user]="userObject"></app-user-avatar>
@@ -33,16 +33,18 @@ import {UserService} from '../services/user.service';
           </div>
 
         </div>
-        <div class="col-9">
+        <div class="col-8">
 
-          <app-post-textarea *ngIf="userObject && userObject.id===authService.identity?.id" (postEvent)="getFeed()"></app-post-textarea>
+          <ng-container *ngIf="userFeed">
+            <app-post-textarea *ngIf="userObject && userObject.id===authService.identity?.id" (postEvent)="getFeed()"></app-post-textarea>
 
-          <ng-container *ngIf="userFeed && userFeed.length>0; else noPosts">
-            <div class="mb-5" *ngFor="let post of userFeed">
-              <app-post [post]="post"></app-post>
-            </div>
+            <ng-container *ngIf="userFeed.length>0; else noPosts">
+              <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of userFeed">
+                <app-post [post]="post"></app-post>
+              </div>
+            </ng-container>
+            <ng-template #noPosts><div class="alert alert-info">No Posts Yet</div></ng-template>
           </ng-container>
-          <ng-template #noPosts><div class="alert alert-info">No Posts Yet</div></ng-template>
 
         </div>
       </div>
