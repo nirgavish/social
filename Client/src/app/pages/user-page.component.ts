@@ -21,7 +21,7 @@ import {UserService} from '../services/user.service';
                 <h6>Followers: <b>{{userObject.followerCount}}</b></h6>
                 <h6>Following: <b>{{userObject.followingCount}}</b></h6>
                 <h6>Public Groups</h6>
-                <pre>{{userObject | json}}</pre>
+                <!--<pre>{{userObject | json}}</pre>-->
               </div>
 
               <ng-container *ngIf="userCanBeFollowed()">

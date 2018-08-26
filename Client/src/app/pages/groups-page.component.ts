@@ -17,7 +17,12 @@ import {GroupService} from '../services/group.service';
 
           <h1>Groups</h1>
           <ul class="list-group">
-            <li *ngFor="let group of groups" class="list-group-item"><a [routerLink]="['/group/'+group.id]">{{group.name}}</a></li>
+            <li *ngFor="let group of groups" class="list-group-item">
+              <a [routerLink]="['/group/'+group.id]">
+                <app-group-avatar class="mr-1 img-sz-1" [group]="group"></app-group-avatar>
+                {{group.name}}
+              </a>
+            </li>
           </ul>
 
         </div>

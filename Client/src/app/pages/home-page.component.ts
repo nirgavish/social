@@ -13,15 +13,18 @@ import {GroupService} from '../services/group.service';
 
           <ul class="list-group mb-2">
             <li class="list-group-item">
+              <a [routerLink]="['/user/'+authService.identity.id]">
+                <app-user-avatar class="mr-1 img-sz-1" [user]="authService.identity"></app-user-avatar>
+                <b>My User Page</b>
+              </a>
+            </li>
+          </ul>
+
+          <ul class="list-group mb-2">
+            <li class="list-group-item">
               <a [routerLink]="['']">
                 <i class="fa fa-anchor mr-1"></i>
                 <b>My Feed</b>
-              </a>
-            </li>
-            <li class="list-group-item">
-              <a [routerLink]="['/user/'+authService.identity.id]">
-                <i class="fa fa-user mr-1"></i>
-                <b>My User Page</b>
               </a>
             </li>
           </ul>
@@ -29,7 +32,8 @@ import {GroupService} from '../services/group.service';
           <ul class="list-group">
             <li *ngFor="let group of groups" class="list-group-item">
               <a [routerLink]="['/group/'+group.id]">
-                <i class="fa fa-user-friends mr-1"></i>
+                <!--<i class="fa fa-user-friends mr-1"></i>-->
+                <app-group-avatar class="mr-1 img-sz-1" [group]="group"></app-group-avatar>
                 {{group.name}}
               </a>
             </li>

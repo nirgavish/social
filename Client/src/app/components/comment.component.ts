@@ -16,7 +16,7 @@ import {PostService} from '../services/post.service';
       </div>
       <div *ngIf="comment.user.id===authService.identity.id">
         <div class="dropdown">
-          <button type="button" class="btn btn-sm btn-basic dropdown-toggle float-right"
+          <button type="button" class="btn btn-xs btn-primary dropdown-toggle float-right"
                   data-toggle="dropdown"></button>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="javascript:;" (click)="deleteComment(comment.id)">Delete</a>

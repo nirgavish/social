@@ -1,4 +1,15 @@
 body {
+  font-family: 'Roboto', sans-serif;
   background-color:#eee;
   overflow-y:scroll;
+
+
+  .btn-xs {
+    padding:0.2em 0;
+    text-align: center;
+    line-height:0;
+    height:1em;
+    width:1em;
+  }
+
 }

@@ -14,7 +14,7 @@ import {PostService} from '../services/post.service';
         <div class="media-body">
           <div *ngIf="authService.identity && (post.user.id===authService.identity.id)" class="float-right">
             <div class="dropdown">
-              <button type="button" class="btn btn-sm btn-basic dropdown-toggle"
+              <button type="button" class="btn btn-xs btn-primary dropdown-toggle"
                       data-toggle="dropdown"></button>
               <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="javascript:;" (click)="deletePost()">Delete</a>

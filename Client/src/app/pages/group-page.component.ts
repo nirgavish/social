@@ -12,7 +12,10 @@ import {GroupService} from '../services/group.service';
 
           <div class="card" *ngIf="groupObject">
             <!--<img class="card-img-top" src="https://www.gravatar.com/avatar/35d5f0fd-c65a-4275-9442-2f9029e20211?d=retro" alt="Card image cap">-->
+            <app-group-avatar class="card-img-top" [group]="groupObject"></app-group-avatar>
+
             <div class="card-body">
+
               <h1 class="card-title">
                 {{groupObject.name}}
               </h1>

@@ -23,6 +23,7 @@ import {GroupService} from './services/group.service';
 import {UserService} from './services/user.service';
 
 import { MediumEditorDirective } from 'angular2-medium-editor';
+import {GroupAvatarComponent} from "./components/group-avatar.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomePageComponent},
@@ -46,6 +47,7 @@ const routes: Routes = [
     GroupsPageComponent,
     PostPageComponent,
     UserAvatarComponent,
+    GroupAvatarComponent,
     MediumEditorDirective,
   ],
   imports: [
