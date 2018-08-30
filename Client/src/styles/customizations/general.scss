@@ -3,7 +3,6 @@ body {
   background-color:#eee;
   overflow-y:scroll;
 
-
   .btn-xs {
     padding:0.2em 0;
     text-align: center;
@@ -12,4 +11,13 @@ body {
     width:1em;
   }
 
+  ul.nav.flex-column {
+    .nav-link {
+      border:1px solid #eee;
+      &:hover{
+        border:1px solid #ddd;
+        background-color: #f8f8f8;
+      }
+    }
+  }
 }

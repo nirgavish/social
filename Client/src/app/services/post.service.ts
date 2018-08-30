@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -12,7 +11,7 @@ export class PostService {
 
   async get(postId) {
     return new Promise((resolve, reject) => {
-      this.http.get(environment.apiurl + `post/${postId}?extended=true`).subscribe((res) => {
+      this.http.get(`post/${postId}?extended=true`).subscribe((res) => {
         resolve(res);
       });
     });
@@ -20,7 +19,7 @@ export class PostService {
 
   async create(obj) {
     return new Promise((resolve, reject) => {
-      this.http.post(environment.apiurl + `post`, obj, {withCredentials: true}).subscribe((res) => {
+      this.http.post(`post`, obj).subscribe((res) => {
         resolve(res);
       });
     });
@@ -28,7 +27,7 @@ export class PostService {
 
   async list() {
     return new Promise((resolve, reject) => {
-      this.http.get(environment.apiurl + 'post', {withCredentials: true}).subscribe((res) => {
+      this.http.get('post').subscribe((res) => {
         resolve(res);
       });
     });
@@ -36,7 +35,7 @@ export class PostService {
 
   delete(postId) {
     return new Promise((resolve, reject) => {
-      this.http.delete(`${environment.apiurl}post/${postId}`, {withCredentials: true}).subscribe((res) => {
+      this.http.delete(`post/${postId}`).subscribe((res) => {
         resolve(res);
       });
     });
@@ -44,7 +43,7 @@ export class PostService {
 
   getComments(postId) {
     return new Promise((resolve, reject) => {
-      this.http.get(`${environment.apiurl}post/${postId}/comments`).subscribe((comments) => {
+      this.http.get(`post/${postId}/comments`).subscribe((comments) => {
         resolve(comments);
       });
     });
@@ -53,8 +52,8 @@ export class PostService {
   async postComment(postId, comment) {
 
     return new Promise((resolve, reject) => {
-      this.http.post(`${environment.apiurl}post/${postId}/comment`, {body: comment}, {withCredentials: true}).subscribe((res) => {
-        this.http.get(`${environment.apiurl}post/${postId}`).subscribe((post) => {
+      this.http.post(`post/${postId}/comment`, {body: comment}).subscribe((res) => {
+        this.http.get(`post/${postId}`).subscribe((post) => {
           resolve(post);
         });
       });
@@ -64,7 +63,7 @@ export class PostService {
 
   deleteComment(postId, commentId) {
     return new Promise((resolve, reject) => {
-      this.http.delete(`${environment.apiurl}post/${postId}/comment/${commentId}`, {withCredentials: true}).subscribe((res) => {
+      this.http.delete(`post/${postId}/comment/${commentId}`).subscribe((res) => {
         resolve(res);
       });
     });

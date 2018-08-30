@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {TopNavComponent} from './components/top-nav.component';
 import {PostComponent} from './components/post.component';
@@ -23,7 +23,8 @@ import {GroupService} from './services/group.service';
 import {UserService} from './services/user.service';
 
 import { MediumEditorDirective } from 'angular2-medium-editor';
-import {GroupAvatarComponent} from "./components/group-avatar.component";
+import {GroupAvatarComponent} from './components/group-avatar.component';
+import {ApiInterceptor} from './interceptors/api.interceptor';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomePageComponent},
@@ -61,7 +62,8 @@ const routes: Routes = [
     AuthService,
     PostService,
     GroupService,
-    UserService
+    UserService,
+    {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

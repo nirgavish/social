@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import { environment } from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -12,7 +11,7 @@ export class GroupService {
 
   join(groupId) {
     return new Promise((resolve, reject) => {
-      this.http.post(environment.apiurl + 'group/' + groupId + '/membership', {}, {withCredentials: true}).subscribe((res) => {
+      this.http.post(`group/${groupId}/membership`, {}).subscribe((res) => {
         resolve(res);
       });
     });
@@ -20,7 +19,7 @@ export class GroupService {
 
   leave(groupId) {
     return new Promise((resolve, reject) => {
-      this.http.delete(environment.apiurl + 'group/' + groupId + '/membership', {withCredentials: true}).subscribe((res) => {
+      this.http.delete(`group/${groupId}/membership`).subscribe((res) => {
         resolve(res);
       });
     });
@@ -28,7 +27,7 @@ export class GroupService {
 
   async get(groupId) {
     return new Promise((resolve, reject) => {
-      this.http.get(environment.apiurl + `group/${groupId}`, {withCredentials: true}).subscribe((res) => {
+      this.http.get(`group/${groupId}`).subscribe((res) => {
         resolve(res);
       });
     });
@@ -36,7 +35,7 @@ export class GroupService {
 
   getMembers(groupId) {
     return new Promise((resolve, reject) => {
-      this.http.get(environment.apiurl + `group/${groupId}/members`, {withCredentials: true}).subscribe((res) => {
+      this.http.get(`group/${groupId}/members`).subscribe((res) => {
         resolve(res);
       });
     });
@@ -44,7 +43,7 @@ export class GroupService {
 
   getFeed(groupId) {
     return new Promise((resolve, reject) => {
-      this.http.get(environment.apiurl + `group/${groupId}/feed`, {withCredentials: true}).subscribe((res) => {
+      this.http.get(`group/${groupId}/feed`).subscribe((res) => {
         resolve(res);
       });
     });
@@ -52,7 +51,7 @@ export class GroupService {
 
   async create(obj) {
     return new Promise((resolve, reject) => {
-      this.http.post(`${environment.apiurl}group`, obj, {withCredentials: true}).subscribe((res) => {
+      this.http.post('group', obj).subscribe((res) => {
         resolve(res);
       });
     });
@@ -60,7 +59,7 @@ export class GroupService {
 
   async list() {
     return new Promise((resolve, reject) => {
-      this.http.get(environment.apiurl + 'group', {withCredentials: true}).subscribe((res) => {
+      this.http.get('group').subscribe((res) => {
         resolve(res);
       });
     });

@@ -3,7 +3,7 @@ import * as md5 from 'md5';
 
 @Component({
   selector: 'app-group-avatar',
-  template: `<img *ngIf="group" class="{{class}}" src="https://www.gravatar.com/avatar/{{md5(group.id)}}?d=retro" alt="{{group.name}}">`,
+  template: `<img *ngIf="group" class="{{class}}" src="https://www.gravatar.com/avatar/{{md5(group.id)}}?d=retro" title="{{group.name}}">`,
   styles: [`
   `]
 })

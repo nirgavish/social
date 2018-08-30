@@ -52,7 +52,7 @@ import {PostService} from '../services/post.service';
           </ng-template>
 
           <div class="media mt-4" *ngIf="authService.identity; else loginToComment">
-            <app-user-avatar class="mr-3 img-sz-2" [user]="authService.identity"></app-user-avatar>
+            <app-user-avatar class="img-sz-2" [user]="authService.identity"></app-user-avatar>
             <div class="media-body">
               <input (keyup)="postComment($event)" class="form-control"/>
             </div>

@@ -11,6 +11,7 @@ import {GroupService} from '../services/group.service';
       <div class="col-4">
         <div *ngIf="authService.identity">
 
+<!--
           <ul class="list-group mb-2">
             <li class="list-group-item">
               <a [routerLink]="['/user/'+authService.identity.id]">
@@ -19,7 +20,9 @@ import {GroupService} from '../services/group.service';
               </a>
             </li>
           </ul>
+-->
 
+<!--
           <ul class="list-group mb-2">
             <li class="list-group-item">
               <a [routerLink]="['']">
@@ -28,16 +31,46 @@ import {GroupService} from '../services/group.service';
               </a>
             </li>
           </ul>
+-->
 
-          <ul class="list-group">
-            <li *ngFor="let group of groups" class="list-group-item">
-              <a [routerLink]="['/group/'+group.id]">
-                <!--<i class="fa fa-user-friends mr-1"></i>-->
+
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['']">
+                <i class="fa fa-anchor mr-1"></i>
+                <b>My User Page</b>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/user/'+authService.identity.id]">
+                <app-user-avatar class="mr-1 img-sz-1" [user]="authService.identity"></app-user-avatar>
+                <b>My User Page</b>
+              </a>
+            </li>
+          </ul>
+
+
+          <ul class="nav flex-column">
+            <li class="nav-item" *ngFor="let group of groups">
+              <a class="nav-link" [routerLink]="['/group/'+group.id]">
                 <app-group-avatar class="mr-1 img-sz-1" [group]="group"></app-group-avatar>
                 {{group.name}}
               </a>
             </li>
           </ul>
+
+<!--
+          <ul class="list-group">
+            <li *ngFor="let group of groups" class="list-group-item">
+              <a [routerLink]="['/group/'+group.id]">
+                &lt;!&ndash;<i class="fa fa-user-friends mr-1"></i>&ndash;&gt;
+                <app-group-avatar class="mr-1 img-sz-1" [group]="group"></app-group-avatar>
+                {{group.name}}
+              </a>
+            </li>
+          </ul>
+-->
 
         </div>
       </div>
