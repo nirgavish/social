@@ -38,7 +38,7 @@ import {GroupService} from '../services/group.service';
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['']">
                 <i class="fa fa-anchor mr-1"></i>
-                <b>My User Page</b>
+                <b>My Feed</b>
               </a>
             </li>
 
