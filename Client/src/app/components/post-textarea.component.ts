@@ -6,12 +6,12 @@ import {PostService} from '../services/post.service';
   selector: 'app-post-textarea',
   template: `
     <div class="mb-2 shadow p-2 card" *ngIf="authService.identity">
-      <!--<textarea [(ngModel)]="postValue" class="container"></textarea>-->
       <div class="card">
-        <medium-editor [(editorModel)]="postValue"
-                       [editorOptions]="{'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}"
-                       [editorPlaceholder]="'What do you want to say?'"
-                       class="p-1"
+        <medium-editor
+          [(editorModel)]="postValue"
+          [editorOptions]="{'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h1', 'h2', 'h3']}}"
+          [editorPlaceholder]="'What do you want to say?'"
+          class="p-1"
         >
         </medium-editor>
       </div>

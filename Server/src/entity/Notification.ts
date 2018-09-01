@@ -1,5 +1,5 @@
 import {
-    BeforeInsert, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn,
+    Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {Post} from "./Post";

@@ -1,10 +1,10 @@
 import {
-    BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne,
+    Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne,
     PrimaryGeneratedColumn, UpdateDateColumn
 } from "typeorm";
-import {User} from "./User";
-import {Group} from "./Group";
 import {Comment} from "./Comment";
+import {Group} from "./Group";
+import {User} from "./User";
 
 @Entity()
 export class Post {
