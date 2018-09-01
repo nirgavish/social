@@ -7,7 +7,10 @@ import {AuthService} from '../services/auth.service';
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top mb-3">
       <div class="container">
-        <a class="navbar-brand" [routerLink]="['']">Q</a>
+        <a class="navbar-brand" [routerLink]="['']">
+          <img class="position-absolute ml-2" style="margin-top:-0.3em;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAmCAYAAABH/4KQAAACyElEQVR42u2YTYiNURjH7x0Z3x+jhhExiyk1NyOmSTMZWSpdLCwspAxZiEg0Gwqr2Qil7IjbWNggFsICiZURkyghsfCVGfkczPv6nTpXt3ee877nvB9zFzz169zuPc9z/u/5eN7n3Fzuv1XZfN+vgS3wAL7BTxiEm9BaTWG1nucdpvV8s60ZbVEFOA8f/WgbgKasBY2BlVAyiBjUQgb08v41ZvcCTT6TpYMOBnhfOR4M8d0L2h6YKvh1Qb/u94m2Lk1RE2AjgR8Ls3QX2mC8RZxmYtyh7U1D1EzYDU8EUV9hb4yYk/TBmR1XVB3sCdnYSlgh4YOPjbPR6+FpiLBfUDTNCiyHDdCe6sYn2Prg6QoaS3LG4Nsl9FWbv1s9dBriXkbkqe/QGPDJw9YIP3VSa5OK+xExSEnwmadfU2E2DGezFKcG6BB8lvn2Vowtjj3yLiTwELQI4koO4i4nmbnTIQfhM02D8EAPfTdbHFfcQlNVocXNEnyOOoq7HjvF4HjEIO6LlNX5bomjOPW2GSftXduC8Y0QVJ3IRUL/RkdxamVmCHEOWOVDZumKIWinEDSvK18Xk8QdZNw+m9lrMQQ9aejf5iBs2CDumv69EPfkqqWtMfTvsVpTz3tFM1GY/XIiP2Qjrt0Qf5uhf73lzJ0QfDdXvo+tShp4JgS/F+LTEKiSR/jCNGGP91X0uWSbVpbCb2GQUxF+x/SFp5wz1edzweXUfXfACpjrXN8FnqpsqqxqtqiiVQ5slZJ3WjXeJsMSva3qRblCYH/IFbDJdIJHS9zOsGqFpb/qEKsTtsMuOA63E/0ToPdPVP76ABf1g6zWIhTrYB/cClwBXutX1pws956rPddip6S5tJN1dk9iq9QFPau91xtD0A1Ym/iCYyFuuqGcGlGYqkMi3TmyFliMEKb+RZpfzdSyAPbDfXik67luXebnc/+K/QEe6Lt7HhJd6gAAAABJRU5ErkJggg=="/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
