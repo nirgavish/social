@@ -1,6 +1,7 @@
 import * as md5 from "md5";
 import {BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Post} from "./Post";
+import {Group} from "./Group";
 
 const SALT = "OP_U529o>sN4}8j:_]:)B=EQ(M9m/1L8^iGJ=U9ovZ>2HTF9f+&PbMoqQ<56R?`";
 
@@ -36,6 +37,9 @@ export class User {
 
     @OneToMany((type) => Post, (post) => post.user)
     public posts: Post[];
+
+    @OneToMany((type) => Group, (group) => group.originalFounder)
+    public groups: Group[];
 
     @BeforeInsert()
     public beforeInsert() {

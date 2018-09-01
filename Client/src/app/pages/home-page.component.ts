@@ -77,9 +77,24 @@ import {GroupService} from '../services/group.service';
 
       <div class="col-8">
         <app-post-textarea (postEvent)="refreshFeed()"></app-post-textarea>
-        <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of feed">
-          <app-post [post]="post"></app-post>
-        </div>
+
+        <ng-container *ngIf="feed && feed.length > 0; else emptyFeed">
+          <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of feed">
+            <app-post [post]="post"></app-post>
+          </div>
+        </ng-container>
+
+        <ng-template #emptyFeed>
+          <div class="alert alert-warning">
+            Your feed is currently empty
+          </div>
+<!--
+          <h2>People you may find interesting:</h2>
+          <h2>Popular groups:</h2>
+-->
+
+        </ng-template>
+
       </div>
 
     </div>

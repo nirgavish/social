@@ -11,7 +11,7 @@ import {GroupService} from '../services/group.service';
         <div class="col-4">
 
           <div class="card" *ngIf="groupObject">
-            <!--<img class="card-img-top" src="https://www.gravatar.com/avatar/35d5f0fd-c65a-4275-9442-2f9029e20211?d=retro" alt="Card image cap">-->
+
             <app-group-avatar class="card-img-top" [group]="groupObject"></app-group-avatar>
 
             <div class="card-body">
@@ -25,12 +25,10 @@ import {GroupService} from '../services/group.service';
               </p>
 
               <p>Founder: </p>
-              <ng-container *ngFor="let member of groupMembers">
-                <a *ngIf="member.memberType===0" class="small font-weight-bold" [routerLink]="['/user/'+member.user.id]"
-                   title="{{member.user.name}}">
-                  <app-user-avatar class="mr-1 mb-1 img-sz-2" [user]="member.user"></app-user-avatar>
-                </a>
-              </ng-container>
+              <a class="small font-weight-bold" [routerLink]="['/user/'+groupObject.originalFounder.id]"
+                 title="{{groupObject.originalFounder.name}}">
+                <app-user-avatar class="mr-1 mb-1 img-sz-2" [user]="groupObject.originalFounder"></app-user-avatar>
+              </a>
 
               <p>Admins: </p>
               <ng-container *ngFor="let member of groupMembers">

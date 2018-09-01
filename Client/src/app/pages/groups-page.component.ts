@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {GroupService} from '../services/group.service';
 
@@ -12,7 +12,7 @@ import {GroupService} from '../services/group.service';
         <div class="col-4">
         </div>
 
-        <div class="col-8">
+        <div class="col-4">
           <input (keyup)="createGroup($event)" placeholder="New Group" class="form-control"/>
 
           <h1>Groups</h1>
@@ -37,7 +37,7 @@ export class GroupsPageComponent implements OnInit {
   groupFeed: Object;
   private groups: Object;
 
-  constructor(private route: ActivatedRoute, private titleService: Title, private groupService: GroupService) {
+  constructor(private router: Router, private route: ActivatedRoute, private titleService: Title, private groupService: GroupService) {
   }
 
   ngOnInit() {
@@ -47,9 +47,12 @@ export class GroupsPageComponent implements OnInit {
 
   async createGroup(event) {
     if (event.keyCode === 13 && event.target.value !== '') {
-      await this.groupService.create({name: event.target.value});
+      const newGroup = await this.groupService.create({name: event.target.value});
+      this.router.navigateByUrl(`/group/${newGroup['id']}`);
+/*
       event.target.value = '';
       this.refreshGroups();
+*/
     }
   }
 

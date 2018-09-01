@@ -70,7 +70,8 @@ class GroupControllerClass {
 
     public async get(req: Request, res: Response) {
         // TODO: Show only groups the user can see (as member or open groups)
-        const group = await Repo(Group).findOne(req.params.id);
+        const group = await Repo(Group).findOne(req.params.id, {relations: ["originalFounder"]});
+        group.originalFounder = User.stripBeforeSend(group.originalFounder);
         if (group) {
             const userId = req.user.id;
             const groupId = req.params.id;
@@ -92,7 +93,7 @@ class GroupControllerClass {
         // TODO: Implement secret, closed and public
         if (req.user.isLoggedIn) {
             const newGroup = req.body;
-            newGroup.dateCreated = new Date();
+            newGroup.originalFounder = req.user.id;
             try {
                 await Repo(Group).save(newGroup);
 
