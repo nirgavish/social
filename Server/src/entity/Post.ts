@@ -1,6 +1,6 @@
 import {
-    BeforeInsert, Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne,
-    PrimaryGeneratedColumn
+    BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne,
+    PrimaryGeneratedColumn, UpdateDateColumn
 } from "typeorm";
 import {User} from "./User";
 import {Group} from "./Group";
@@ -15,8 +15,11 @@ export class Post {
     @Column("text")
     public body: string;
 
-    @Column()
-    public dateCreated: Date = new Date();
+    @CreateDateColumn()
+    public dateCreated: Date;
+
+    @UpdateDateColumn()
+    public dateModified: Date;
 
     @Column()
     public commentCount: number;

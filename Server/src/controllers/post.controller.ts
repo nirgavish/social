@@ -27,7 +27,7 @@ class PostControllerClass {
     public async list(req: Request, res: Response) {
         // TODO: Paging
         const notifications = await Repo(Notification).find({
-            order: {dateCreated: "DESC"},
+            order: {dateModified: "DESC"},
             relations: ["post", "post.user", "post.lastComment", "post.lastComment.user", "post.group"],
             where: {recipient: req.user.id},
         });

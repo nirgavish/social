@@ -1,9 +1,9 @@
 import {EntitySubscriberInterface, EventSubscriber, InsertEvent} from "typeorm";
 import {Follow} from "../entity/Follow";
+import {Member} from "../entity/Member";
 import {ActivityType, Notification} from "../entity/Notification";
 import {Post} from "../entity/Post";
 import {Repo} from "../lib/repos";
-import {Member} from "../entity/Member";
 
 @EventSubscriber()
 export class PostSubscriber implements EntitySubscriberInterface<Post> {

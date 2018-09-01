@@ -9,7 +9,7 @@ import {TopNavComponent} from './components/top-nav.component';
 import {PostComponent} from './components/post.component';
 import {HomePageComponent} from './pages/home-page.component';
 import {UserPageComponent} from './pages/user-page.component';
-import {PostTextareaComponent} from './components/app-post-textarea.component';
+import {PostTextareaComponent} from './components/post-textarea.component';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from './services/auth.service';
 import {GroupPageComponent} from './pages/group-page.component';

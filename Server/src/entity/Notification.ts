@@ -1,4 +1,7 @@
-import {BeforeInsert, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {
+    BeforeInsert, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import {Post} from "./Post";
 import {User} from "./User";
 
@@ -16,6 +19,9 @@ export class Notification {
 
     @CreateDateColumn()
     public dateCreated: Date;
+
+    @UpdateDateColumn()
+    public dateModified: Date;
 
     @ManyToOne((type) => User, {onDelete: "CASCADE"}) // , (user) => user.posts
     public recipient: User;
