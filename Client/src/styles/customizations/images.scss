@@ -1,19 +1,21 @@
+$baseSize: 1em;
+
 .img-sz-1 {
-  width:1em;
-  height:1em;
+  width:$baseSize;
+  height:$baseSize;
 }
 
 .img-sz-2 {
-  width:2em;
-  height:2em;
+  width:$baseSize * 2;
+  height:$baseSize * 2;
 }
 
 .img-sz-3 {
-  width:3em;
-  height:3em;
+  width:$baseSize * 3;
+  height:$baseSize * 3;
 }
 
 .img-sz-4 {
-  width:4em;
-  height:4em;
+  width:$baseSize * 4;
+  height:$baseSize * 4;
 }

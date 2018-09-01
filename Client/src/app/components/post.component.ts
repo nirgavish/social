@@ -29,7 +29,7 @@ import {PostService} from '../services/post.service';
         </span>
 
           <a [routerLink]="['/post/' + post.id]">
-            <div class="small text-muted">{{post.dateCreated}}</div>
+            <div title="{{post.dateCreated}}" class="small text-muted">{{post.dateCreated | timeAgo}}</div>
           </a>
 
           <div>

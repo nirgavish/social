@@ -21,6 +21,7 @@ import {CommentComponent} from './components/comment.component';
 import {PostService} from './services/post.service';
 import {GroupService} from './services/group.service';
 import {UserService} from './services/user.service';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { MediumEditorDirective } from 'angular2-medium-editor';
 import {GroupAvatarComponent} from './components/group-avatar.component';
@@ -50,6 +51,7 @@ const routes: Routes = [
     UserAvatarComponent,
     GroupAvatarComponent,
     MediumEditorDirective,
+    TimeAgoPipe,
   ],
   imports: [
     BrowserModule,

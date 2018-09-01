@@ -1,6 +1,8 @@
+$backgroundColor: #e0e0e0;
+
 body {
   font-family: 'Roboto', sans-serif;
-  background-color:#eee;
+  background-color:$backgroundColor;
   overflow-y:scroll;
 
   .btn-xs {
@@ -13,10 +15,10 @@ body {
 
   ul.nav.flex-column {
     .nav-link {
-      border:1px solid #eee;
+      border:1px solid $backgroundColor;
       &:hover{
-        border:1px solid #ddd;
-        background-color: #f8f8f8;
+        border:1px solid darken($backgroundColor, 6);
+        background-color: lighten($backgroundColor, 2);
       }
     }
   }

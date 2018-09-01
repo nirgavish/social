@@ -11,7 +11,7 @@ import {PostService} from '../services/post.service';
       <div class="media-body">
         <a class="small d-block font-weight-bold"
            [routerLink]="['/user/'+comment.user?.id]">{{comment.user?.name}}</a>
-        <div class="small text-muted">{{comment.dateCreated}}</div>
+        <div title="{{comment.dateCreated}}" class="small text-muted">{{comment.dateCreated | timeAgo}}</div>
         {{comment.body}}
       </div>
       <div *ngIf="comment.user.id===authService.identity.id">

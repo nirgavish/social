@@ -21,6 +21,7 @@
     "md5": "^2.2.1",
     "medium-editor": "^5.23.3",
     "rxjs": "^6.0.0",
+    "time-ago-pipe": "^1.3.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
