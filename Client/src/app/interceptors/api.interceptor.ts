@@ -7,9 +7,12 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {Injectable} from '@angular/core';
+import {AuthService} from '../services/auth.service';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
+  constructor(/*private authService: AuthService*/) {}
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const url = environment.apiurl;
     req = req.clone({

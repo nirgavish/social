@@ -21,6 +21,8 @@ import {CommentComponent} from './components/comment.component';
 import {PostService} from './services/post.service';
 import {GroupService} from './services/group.service';
 import {UserService} from './services/user.service';
+import {ConfigService} from './services/config.service';
+
 import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { MediumEditorDirective } from 'angular2-medium-editor';
@@ -65,6 +67,7 @@ const routes: Routes = [
     PostService,
     GroupService,
     UserService,
+    ConfigService,
     {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]

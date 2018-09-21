@@ -14,7 +14,7 @@ import {PostService} from '../services/post.service';
         <div title="{{comment.dateCreated}}" class="small text-muted">{{comment.dateCreated | timeAgo}}</div>
         {{comment.body}}
       </div>
-      <div *ngIf="comment.user.id===authService.identity.id">
+      <div *ngIf="authService.identity && comment.user.id===authService.identity.id">
         <div class="dropdown">
           <button type="button" class="btn btn-xs btn-primary dropdown-toggle float-right"
                   data-toggle="dropdown"></button>

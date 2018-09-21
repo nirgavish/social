@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "ng serve --watch",
-    "build": "ng build"
+    "build": "ng build",
+    "production:build+serve": "ng build && http-server ./dist/Client -p 80",
+    "production:serve": "http-server ./dist/Client -p 80"
   },
   "private": true,
   "dependencies": {

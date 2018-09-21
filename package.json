@@ -1,0 +1,20 @@
+{
+  "name": "social_qyooh",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "install" : "cd ./Client && npm install --loglevel silly && cd ../Server && npm install --loglevel silly",
+    "dev:server": "cd ./Server && npm run start",
+    "dev:client": "cd ./Client && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nirgavish/social.git"
+  },
+  "author": "Nir Gavish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nirgavish/social/issues"
+  },
+  "homepage": "https://github.com/nirgavish/social#readme"
+}

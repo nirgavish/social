@@ -53,7 +53,7 @@ class GroupControllerClass {
 
     public async getFeed(req: Request, res: Response) {
         // TODO: Show feed only of groups the user can see (as member or open groups)
-        const posts = await Repo(Post).find({where: {group: req.params.id}, order: {dateCreated: "DESC"}, relations: ["user"]});
+        const posts = await Repo(Post).find({where: {group: req.params.id}, order: {dateCreated: "DESC"}, relations: ["user", "lastComment", "lastComment.user"]});
         posts.forEach((post) => {
             post.user = User.stripBeforeSend(post.user);
         });

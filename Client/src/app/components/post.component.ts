@@ -12,6 +12,7 @@ import {PostService} from '../services/post.service';
 
         <app-user-avatar class="mr-3 img-sz-4" [user]="post.user"></app-user-avatar>
         <div class="media-body">
+
           <div *ngIf="authService.identity && (post.user.id===authService.identity.id)" class="float-right">
             <div class="dropdown">
               <button type="button" class="btn btn-xs btn-primary dropdown-toggle"
@@ -58,7 +59,7 @@ import {PostService} from '../services/post.service';
             </div>
           </div>
           <ng-template #loginToComment>
-            <div class="alert alert-secondary mt-4">Login to comment</div>
+            <div class="alert alert-info mt-4">Login to comment</div>
           </ng-template>
 
         </div>

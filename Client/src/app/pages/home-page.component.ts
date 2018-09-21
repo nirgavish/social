@@ -8,31 +8,9 @@ import {GroupService} from '../services/group.service';
   template: `
     <div class="row">
 
-      <div class="col-4">
-        <div *ngIf="authService.identity">
+      <div class="col-4" *ngIf="authService.identity">
 
-<!--
-          <ul class="list-group mb-2">
-            <li class="list-group-item">
-              <a [routerLink]="['/user/'+authService.identity.id]">
-                <app-user-avatar class="mr-1 img-sz-1" [user]="authService.identity"></app-user-avatar>
-                <b>My User Page</b>
-              </a>
-            </li>
-          </ul>
--->
-
-<!--
-          <ul class="list-group mb-2">
-            <li class="list-group-item">
-              <a [routerLink]="['']">
-                <i class="fa fa-anchor mr-1"></i>
-                <b>My Feed</b>
-              </a>
-            </li>
-          </ul>
--->
-
+        <ng-container>
 
           <ul class="nav flex-column">
             <li class="nav-item">
@@ -50,7 +28,6 @@ import {GroupService} from '../services/group.service';
             </li>
           </ul>
 
-
           <ul class="nav flex-column">
             <li class="nav-item" *ngFor="let group of groups">
               <a class="nav-link" [routerLink]="['/group/'+group.id]">
@@ -59,30 +36,26 @@ import {GroupService} from '../services/group.service';
               </a>
             </li>
           </ul>
+        </ng-container>
 
-<!--
-          <ul class="list-group">
-            <li *ngFor="let group of groups" class="list-group-item">
-              <a [routerLink]="['/group/'+group.id]">
-                &lt;!&ndash;<i class="fa fa-user-friends mr-1"></i>&ndash;&gt;
-                <app-group-avatar class="mr-1 img-sz-1" [group]="group"></app-group-avatar>
-                {{group.name}}
-              </a>
-            </li>
-          </ul>
--->
-
-        </div>
       </div>
 
-      <div class="col-8">
+      <div class="col-{{(authService.identity)?8:12}}">
         <app-post-textarea (postEvent)="refreshFeed()"></app-post-textarea>
 
-        <ng-container *ngIf="feed && feed.length > 0; else emptyFeed">
-          <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of feed">
-            <app-post [post]="post"></app-post>
-          </div>
+        <ng-container *ngIf="authService.identity; else noFeed">
+          <ng-container *ngIf="feed && feed.length > 0; else emptyFeed">
+            <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of feed">
+              <app-post [post]="post"></app-post>
+            </div>
+          </ng-container>
         </ng-container>
+
+        <ng-template #noFeed>
+          <div class="alert alert-info">
+            Your are currently logged out
+          </div>
+        </ng-template>
 
         <ng-template #emptyFeed>
           <div class="alert alert-warning">

@@ -13,6 +13,7 @@
             "app",
             "kebab-case"
         ],
-      "max-line-length": [ false ]
+      "max-line-length": [ false ],
+      "no-debugger": false
     }
 }
