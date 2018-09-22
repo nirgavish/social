@@ -25,26 +25,13 @@ import {GroupService} from '../services/group.service';
               </p>
 
               <p>Founder: </p>
-              <a class="small font-weight-bold" [routerLink]="['/user/'+groupObject.originalFounder.id]"
-                 title="{{groupObject.originalFounder.name}}">
-                <app-user-avatar class="mr-1 mb-1 img-sz-2" [user]="groupObject.originalFounder"></app-user-avatar>
-              </a>
+              <app-user-avatar class="mr-1 mb-1 img-sz-2" [user]="groupObject.originalFounder"></app-user-avatar>
 
               <p>Admins: </p>
-              <ng-container *ngFor="let member of groupMembers">
-                <a *ngIf="member.memberType===1" class="small font-weight-bold" [routerLink]="['/user/'+member.user.id]"
-                   title="{{member.user.name}}">
-                  <app-user-avatar class="mr-1 mb-1 img-sz-2" [user]="member.user"></app-user-avatar>
-                </a>
-              </ng-container>
+              <app-user-avatar *ngFor="let member of groupAdmins" class="mr-1 mb-1 img-sz-2" [user]="member.user"></app-user-avatar>
 
               <p>Members: </p>
-              <ng-container *ngFor="let member of groupMembers">
-                <a *ngIf="member.memberType===2" class="small font-weight-bold" [routerLink]="['/user/'+member.user.id]"
-                   title="{{member.user.name}}">
-                  <app-user-avatar class="mr-1 mb-1 img-sz-2" [user]="member.user"></app-user-avatar>
-                </a>
-              </ng-container>
+              <app-user-avatar *ngFor="let member of groupParticipants" class="mr-1 mb-1 img-sz-2" [user]="member.user"></app-user-avatar>
 
               <hr/>
               <a (click)="join()" *ngIf="!groupObject.isMember" href="javascript:;" class="btn btn-primary">Join</a>
@@ -63,9 +50,12 @@ import {GroupService} from '../services/group.service';
 
           <app-post-textarea (postEvent)="getFeed(groupId)" [groupId]="groupId"></app-post-textarea>
 
+          <app-feed [feed]="groupFeed"></app-feed>
+<!--
           <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of groupFeed">
             <app-post [post]="post"></app-post>
           </div>
+-->
 
         </div>
       </div>
@@ -75,7 +65,11 @@ import {GroupService} from '../services/group.service';
 })
 
 export class GroupPageComponent implements OnInit {
-  groupMembers: {};
+
+  groupMembers: any;
+  groupAdmins: any;
+  groupParticipants: any;
+
   groupFeed: Object;
   private groupId: any;
   private groupObject: Object;
@@ -108,6 +102,8 @@ export class GroupPageComponent implements OnInit {
 
   async getMembers(groupId) {
     this.groupMembers = await this.groupService.getMembers(groupId);
+    this.groupAdmins = this.groupMembers.filter((member) => member.memberType === 1);
+    this.groupParticipants = this.groupMembers.filter((member) => member.memberType === 2);
   }
 
   async getGroup(groupId) {

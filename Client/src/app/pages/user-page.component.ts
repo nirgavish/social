@@ -12,7 +12,7 @@ import {UserService} from '../services/user.service';
         <div class="col-4">
 
           <div class="card" *ngIf="userObject">
-            <app-user-avatar class="card-img-top" [user]="userObject"></app-user-avatar>
+            <app-user-avatar class="card-img-top" [user]="userObject" [link]="false"></app-user-avatar>
             <div class="card-body">
               <h1 class="card-title">
                 {{userObject.name}}

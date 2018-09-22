@@ -43,29 +43,14 @@ import {GroupService} from '../services/group.service';
       <div class="col-{{(authService.identity)?8:12}}">
         <app-post-textarea (postEvent)="refreshFeed()"></app-post-textarea>
 
-        <ng-container *ngIf="authService.identity; else noFeed">
-          <ng-container *ngIf="feed && feed.length > 0; else emptyFeed">
-            <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of feed">
-              <app-post [post]="post"></app-post>
-            </div>
-          </ng-container>
+        <ng-container *ngIf="authService.identity; else noFeedForUnauthenticatedUsers">
+          <app-feed [feed]="feed"></app-feed>
         </ng-container>
 
-        <ng-template #noFeed>
+        <ng-template #noFeedForUnauthenticatedUsers>
           <div class="alert alert-info">
             Your are currently logged out
           </div>
-        </ng-template>
-
-        <ng-template #emptyFeed>
-          <div class="alert alert-warning">
-            Your feed is currently empty
-          </div>
-<!--
-          <h2>People you may find interesting:</h2>
-          <h2>Popular groups:</h2>
--->
-
         </ng-template>
 
       </div>
@@ -77,7 +62,7 @@ import {GroupService} from '../services/group.service';
 export class HomePageComponent implements OnInit {
   res: Object;
   private groups: Object;
-  private feed: Object;
+  private feed;
 
   constructor(private titleService: Title, private authService: AuthService, private postService: PostService, private groupService: GroupService) {
   }

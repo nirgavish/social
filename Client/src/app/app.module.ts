@@ -29,6 +29,7 @@ import { MediumEditorDirective } from 'angular2-medium-editor';
 import {GroupAvatarComponent} from './components/group-avatar.component';
 import {ApiInterceptor} from './interceptors/api.interceptor';
 import { WalledGardenWelcomeScreenComponent } from './pages/walled-garden-welcome-screen.component';
+import { FeedComponent } from './components/feed.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomePageComponent},
@@ -56,6 +57,7 @@ const routes: Routes = [
     MediumEditorDirective,
     TimeAgoPipe,
     WalledGardenWelcomeScreenComponent,
+    FeedComponent,
   ],
   imports: [
     BrowserModule,
