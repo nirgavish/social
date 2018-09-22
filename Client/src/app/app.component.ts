@@ -7,7 +7,7 @@ import {ConfigService} from './services/config.service';
   styles: [`
   `],
   template: `
-    <ng-container *ngIf="configService.config!==undefined || authService.isLoggedIn!==undefined">
+    <ng-container *ngIf="configService.config!==undefined && authService.isLoggedIn!==undefined">
 
       <ng-container *ngIf="(authService.isLoggedIn || configService.config.walledGarden==='false') ; else walledGarden">
         <app-top-nav></app-top-nav>
@@ -17,10 +17,11 @@ import {ConfigService} from './services/config.service';
       </ng-container>
 
       <ng-template #walledGarden>
-        <div class="alert alert-danger">Walled Garden</div>
+        <app-walled-garden-welcome-screen></app-walled-garden-welcome-screen>
       </ng-template>
 
     </ng-container>
+
     <!--<pre style="position:fixed;bottom:0;left:0;background-color:#fff;">{{configService.config | json}}<hr/>{{authService | json}}</pre>-->
   `
 })
