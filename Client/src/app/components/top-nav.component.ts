@@ -29,7 +29,7 @@ import {AuthService} from '../services/auth.service';
 
             <div class="dropdown">
               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                <app-user-avatar class="ml-1 mr-1 img-sz-1" [user]="authService.identity"></app-user-avatar>
+                <app-user-avatar class="ml-1 mr-1 img-sz-1" [user]="authService.identity" [link]="false"></app-user-avatar>
                 <b>{{authService.identity.name}}</b>
               </button>
               <div class="dropdown-menu">
