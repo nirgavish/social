@@ -25,8 +25,8 @@ import {AuthService} from '../services/auth.service';
               <a class="nav-link" href="javascript:;" [routerLink]="['/groups']">Groups</a>
             </li>
           </ul>
-          <ng-container *ngIf="authService.isLoggedIn; else loginWidget">
 
+          <ng-container *ngIf="authService.isLoggedIn; else loginWidget">
             <div class="dropdown">
               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                 <app-user-avatar class="ml-1 mr-1 img-sz-1" [user]="authService.identity" [link]="false"></app-user-avatar>

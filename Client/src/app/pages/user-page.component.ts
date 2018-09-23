@@ -36,14 +36,8 @@ import {UserService} from '../services/user.service';
         <div class="col-8">
 
           <ng-container *ngIf="userFeed">
-            <app-post-textarea *ngIf="userObject && userObject.id===authService.identity?.id" (postEvent)="getFeed()"></app-post-textarea>
-
-            <ng-container *ngIf="userFeed.length>0; else noPosts">
-              <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of userFeed">
-                <app-post [post]="post"></app-post>
-              </div>
-            </ng-container>
-            <ng-template #noPosts><div class="alert alert-info">No Posts Yet</div></ng-template>
+            <app-post-textarea *ngIf="userObject && userObject.id===authService.identity?.id" (postEvent)="getFeed(userObject.id)"></app-post-textarea>
+            <app-feed [feed]="userFeed"></app-feed>
           </ng-container>
 
         </div>

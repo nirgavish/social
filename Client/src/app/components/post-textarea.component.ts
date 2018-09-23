@@ -25,7 +25,6 @@ export class PostTextareaComponent implements OnInit {
   postValue: any = '';
 
   @Input() groupId;
-
   @Output() postEvent = new EventEmitter<any>();
 
   async submitPost() {
