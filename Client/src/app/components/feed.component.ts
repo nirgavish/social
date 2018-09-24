@@ -5,8 +5,8 @@ import {Component, Input, OnInit} from '@angular/core';
   template: `
     <ng-container *ngIf="feed">
       <ng-container *ngIf="feed.length > 0; else emptyFeed">
-        <div class="mb-2 card p-2 shadow-sm" *ngFor="let post of feed">
-          <app-post [post]="post"></app-post>
+        <div *ngFor="let post of feed">
+          <app-post *ngIf="!post.deleted" class="mb-2 card p-2 shadow-sm" [post]="post"></app-post>
         </div>
       </ng-container>
     </ng-container>

@@ -6,7 +6,7 @@ import {PostService} from '../services/post.service';
 @Component({
   selector: 'app-post',
   template: `
-    <ng-container *ngIf="!deleted">
+    <ng-container *ngIf="!post.deleted">
 
       <div class="media">
 
@@ -71,7 +71,6 @@ import {PostService} from '../services/post.service';
 })
 export class PostComponent implements OnInit {
   extended: any;
-  deleted: boolean;
   comments: Object = null;
 
   @Input() post;
@@ -109,9 +108,9 @@ export class PostComponent implements OnInit {
 
   async refreshPost() {
     this.post = await this.postService.get(this.post.id);
-    this.deleted = true;
+    this.post.deleted = true;
     this.cd.detectChanges();
-    this.deleted = false;
+    this.post.deleted = false;
   }
 
   async postComment(event) {
@@ -126,7 +125,7 @@ export class PostComponent implements OnInit {
 
   async deletePost() {
     await this.postService.delete(this.post.id);
-    this.deleted = true;
+    this.post.deleted = true;
   }
 
   async getExtendedComments() {
