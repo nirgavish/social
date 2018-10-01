@@ -8,7 +8,7 @@ import {GroupService} from '../services/group.service';
     <ng-container>
 
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
 
           <div class="card" *ngIf="groupObject">
 
@@ -46,7 +46,7 @@ import {GroupService} from '../services/group.service';
           </div>
 
         </div>
-        <div class="col-8">
+        <div class="col-6">
 
           <app-post-textarea (postEvent)="getFeed(groupId)" [groupId]="groupId"></app-post-textarea>
 
@@ -58,6 +58,10 @@ import {GroupService} from '../services/group.service';
 -->
 
         </div>
+
+        <div class="col-3">
+        </div>
+
       </div>
 
     </ng-container>

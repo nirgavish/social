@@ -8,7 +8,7 @@ import {GroupService} from '../services/group.service';
   template: `
     <div class="row">
 
-      <div class="col-4" *ngIf="authService.identity">
+      <div class="col-3" *ngIf="authService.identity">
 
         <ng-container>
 
@@ -40,7 +40,7 @@ import {GroupService} from '../services/group.service';
 
       </div>
 
-      <div class="col-{{(authService.identity)?8:12}}">
+      <div class="col-{{(authService.identity)?6:9}}">
         <app-post-textarea (postEvent)="refreshFeed()"></app-post-textarea>
 
         <ng-container *ngIf="authService.identity; else noFeedForUnauthenticatedUsers">
@@ -53,6 +53,9 @@ import {GroupService} from '../services/group.service';
           </div>
         </ng-template>
 
+      </div>
+
+      <div class="col-3">
       </div>
 
     </div>

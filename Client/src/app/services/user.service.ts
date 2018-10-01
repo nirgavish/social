@@ -8,6 +8,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  async create(obj) {
+    return new Promise((resolve, reject) => {
+      this.http.post('user', obj).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
   get(userId) {
     return new Promise((resolve, reject) => {
       this.http.get(`user/${userId}`).subscribe((res) => {

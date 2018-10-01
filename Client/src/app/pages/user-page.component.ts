@@ -9,7 +9,7 @@ import {UserService} from '../services/user.service';
     <ng-container>
 
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
 
           <div class="card" *ngIf="userObject">
             <app-user-avatar class="card-img-top" [user]="userObject" [link]="false"></app-user-avatar>
@@ -33,7 +33,7 @@ import {UserService} from '../services/user.service';
           </div>
 
         </div>
-        <div class="col-8">
+        <div class="col-6">
 
           <ng-container *ngIf="userFeed">
             <app-post-textarea *ngIf="userObject && userObject.id===authService.identity?.id" (postEvent)="getFeed(userObject.id)"></app-post-textarea>
