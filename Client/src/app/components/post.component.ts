@@ -2,6 +2,7 @@ import {ApplicationRef, Component, Input, OnInit} from '@angular/core';
 import {ChangeDetectorRef} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {PostService} from '../services/post.service';
+import {LanguageService} from "../services/language.service";
 
 @Component({
   selector: 'app-post',
@@ -30,12 +31,12 @@ import {PostService} from '../services/post.service';
         </span>
 
           <a [routerLink]="['/post/' + post.id]">
-            <div title="{{post.dateCreated}}" class="small text-muted">{{post.dateCreated | timeAgo}}</div>
+            <div title="{{post.dateCreated | date}}" class="small text-muted">{{post.dateCreated | timeAgo}}</div>
           </a>
 
           <div>
             <span [innerHTML]="postBody()"></span>
-            <a class="text-nowrap small" href="javascript:;" (click)="extendTextView()" *ngIf="!postPageMode && post.body.length>200"> Read More...</a>
+            <a class="text-nowrap small" href="javascript:;" (click)="extendTextView()" *ngIf="!postPageMode && post.body.length>200"> {{L('Read More')}}...</a>
           </div>
 
           <ng-container *ngIf="!post.comments; else fullComments">
@@ -59,7 +60,7 @@ import {PostService} from '../services/post.service';
             </div>
           </div>
           <ng-template #loginToComment>
-            <div class="alert alert-info mt-4">Login to comment</div>
+            <div class="alert alert-info mt-4">{{L('Login to comment')}}</div>
           </ng-template>
 
         </div>
@@ -70,6 +71,7 @@ import {PostService} from '../services/post.service';
   `,
 })
 export class PostComponent implements OnInit {
+  L;
   extended: any;
   comments: Object = null;
 
@@ -78,7 +80,8 @@ export class PostComponent implements OnInit {
   private fullTextView: boolean;
   private extendTextViewClicked: boolean;
 
-  constructor(private authService: AuthService, private cd: ChangeDetectorRef, private postService: PostService) {
+  constructor(private authService: AuthService, private cd: ChangeDetectorRef, private postService: PostService, private languageService: LanguageService) {
+    this.L = languageService.get;
   }
 
   extendTextView() {

@@ -17,8 +17,8 @@ class GroupControllerClass {
 
     public async joinLeave(req: Request, res: Response) {
         // TODO: More complex flows to joining (admin confirmations, invites, etc.)
-        if (req.user.isLoggedIn) {
-            const memberConnection = {user: req.user.id, group: req.params.id };
+        if (req["user"].isLoggedIn) {
+            const memberConnection = {user: req["user"].id, group: req.params.id };
             const connection = await Repo(Member).findOne(memberConnection);
 
             try {
@@ -34,7 +34,7 @@ class GroupControllerClass {
                     const allNotifications = await Repo(Notification).find({
                         relations: ["recipient"],
                         where: {
-                            recipient: req.user.id,
+                            recipient: req["user"].id,
                             groupId: req.params.id,
                         },
                     });
@@ -73,7 +73,7 @@ class GroupControllerClass {
         const group = await Repo(Group).findOne(req.params.id, {relations: ["originalFounder"]});
         group.originalFounder = User.stripBeforeSend(group.originalFounder);
         if (group) {
-            const userId = req.user.id;
+            const userId = req["user"].id;
             const groupId = req.params.id;
             const connection = await Repo(Member).findOne({user: userId, group: groupId});
             group.isMember = !!connection;
@@ -91,13 +91,13 @@ class GroupControllerClass {
 
     public async post(req: Request, res: Response) {
         // TODO: Implement secret, closed and public
-        if (req.user.isLoggedIn) {
+        if (req["user"].isLoggedIn) {
             const newGroup = req.body;
-            newGroup.originalFounder = req.user.id;
+            newGroup.originalFounder = req["user"].id;
             try {
                 await Repo(Group).save(newGroup);
 
-                const founderConnection = {user: req.user.id, group: newGroup.id };
+                const founderConnection = {user: req["user"].id, group: newGroup.id };
                 founderConnection["memberType"] = MemberType.FOUNDER;
                 await Repo(Member).save(founderConnection);
 

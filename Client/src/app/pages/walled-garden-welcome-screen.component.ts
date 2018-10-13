@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {UserService} from '../services/user.service';
 import {ConfigService} from '../services/config.service';
+import {LanguageService} from '../services/language.service';
 
 // TODO: Layout and visuals for walled garden screen
 // TODO: Encapsulate login form in a component and replace it in walled garden AND navbar
@@ -11,19 +12,19 @@ import {ConfigService} from '../services/config.service';
   template: `
     <h1>Walled Garden</h1>
 
-    <h2>Login</h2>
+    <h2>{{L('Login')}}</h2>
     <div class="form-inline">
-      <input type="text" class="form-control" [(ngModel)]="model.login_email" placeholder="Email">
-      <input type="password" class="form-control" [(ngModel)]="model.login_password" placeholder="Password">
-      <button (click)="login();" class="btn btn-primary">Login</button>
+      <input type="text" class="form-control" [(ngModel)]="model.login_email" placeholder="{{L('Email')}}">
+      <input type="password" class="form-control" [(ngModel)]="model.login_password" placeholder="{{L('Password')}}">
+      <button (click)="login();" class="btn btn-primary">{{L('Login')}}</button>
     </div>
 
-    <h2>Register</h2>
+    <h2>{{L('Register')}}</h2>
     <div class="form-inline" *ngIf="configService.config.usersMayRegister">
-      <input type="text" class="form-control" [(ngModel)]="model.register_name" placeholder="Name">
-      <input type="text" class="form-control" [(ngModel)]="model.register_email" placeholder="Email">
-      <input type="password" class="form-control" [(ngModel)]="model.register_password" placeholder="Password">
-      <button (click)="register();" class="btn btn-default">Register</button>
+      <input type="text" class="form-control" [(ngModel)]="model.register_name" placeholder="{{L('Name')}}">
+      <input type="text" class="form-control" [(ngModel)]="model.register_email" placeholder="{{L('Email')}}">
+      <input type="password" class="form-control" [(ngModel)]="model.register_password" placeholder="{{L('Password')}}">
+      <button (click)="register();" class="btn btn-default">{{L('Register')}}</button>
     </div>
 
 
@@ -32,13 +33,16 @@ import {ConfigService} from '../services/config.service';
 })
 export class WalledGardenWelcomeScreenComponent implements OnInit {
   model: any = {};
+  private L;
 /*
   private name;
   private email;
   private password;
 */
 
-  constructor(private authService: AuthService, private userService: UserService, private configService: ConfigService) { }
+  constructor(private authService: AuthService, private userService: UserService, private configService: ConfigService, private languageService: LanguageService) {
+    this.L = languageService.get;
+  }
 
   ngOnInit() {
   }

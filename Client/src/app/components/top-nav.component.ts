@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
+import {LanguageService} from "../services/language.service";
 
 @Component({
   selector: 'app-top-nav',
@@ -19,10 +20,10 @@ import {AuthService} from '../services/auth.service';
         <div class="collapse navbar-collapse" id="navbar01">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="javascript:;" [routerLink]="['']">Home</a>
+              <a class="nav-link" href="javascript:;" [routerLink]="['']">{{L('Home')}}</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="javascript:;" [routerLink]="['/groups']">Groups</a>
+              <a class="nav-link" href="javascript:;" [routerLink]="['/groups']">{{L('Groups')}}</a>
             </li>
           </ul>
 
@@ -55,6 +56,8 @@ import {AuthService} from '../services/auth.service';
 })
 export class TopNavComponent implements OnInit {
 
+  L;
+
   private email;
   private password;
 
@@ -66,7 +69,8 @@ export class TopNavComponent implements OnInit {
     this.authService.logout();
   }
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private languageService: LanguageService) {
+    this.L = languageService.get;
   }
 
   ngOnInit() {

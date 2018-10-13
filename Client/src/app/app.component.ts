@@ -29,5 +29,4 @@ export class AppComponent {
   constructor(private authService: AuthService, private configService: ConfigService) {
   }
 
-  // TODO: Handle walled garden with login/register screen
 }

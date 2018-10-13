@@ -3,6 +3,7 @@ import {Title} from '@angular/platform-browser';
 import {AuthService} from '../services/auth.service';
 import {PostService} from '../services/post.service';
 import {GroupService} from '../services/group.service';
+import {LanguageService} from '../services/language.service';
 
 @Component({
   template: `
@@ -16,14 +17,14 @@ import {GroupService} from '../services/group.service';
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['']">
                 <i class="fa fa-anchor mr-1"></i>
-                <b>My Feed</b>
+                <b>{{L('My Feed')}}</b>
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/user/'+authService.identity.id]">
                 <app-user-avatar class="mr-1 img-sz-1" [user]="authService.identity"></app-user-avatar>
-                <b>My User Page</b>
+                <b>{{L('My User Page')}}</b>
               </a>
             </li>
           </ul>
@@ -66,8 +67,10 @@ export class HomePageComponent implements OnInit {
   res: Object;
   private groups: Object;
   private feed;
+  private L: any;
 
-  constructor(private titleService: Title, private authService: AuthService, private postService: PostService, private groupService: GroupService) {
+  constructor(private titleService: Title, private authService: AuthService, private postService: PostService, private groupService: GroupService, private languageService: LanguageService) {
+    this.L = languageService.get;
   }
 
   ngOnInit() {

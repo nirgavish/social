@@ -20,6 +20,7 @@ export class PostSubscriber implements EntitySubscriberInterface<Post> {
             partialUpdate["subject"] = event.entity["user"];
             partialUpdate["activity"] = ActivityType.COMMENTED_ON;
 
+            // TODO: Create notification for posting user if one does not exist
             Repo(Notification).update({post}, {...partialUpdate});
             resolve();
         });

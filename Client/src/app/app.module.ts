@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {AppComponent} from './app.component';
@@ -30,6 +30,11 @@ import {GroupAvatarComponent} from './components/group-avatar.component';
 import {ApiInterceptor} from './interceptors/api.interceptor';
 import { WalledGardenWelcomeScreenComponent } from './pages/walled-garden-welcome-screen.component';
 import { FeedComponent } from './components/feed.component';
+
+import { registerLocaleData } from '@angular/common';
+import localeHe from '@angular/common/locales/he';
+import {LanguageService} from "./services/language.service";
+registerLocaleData(localeHe, 'he');
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomePageComponent},
@@ -68,10 +73,12 @@ const routes: Routes = [
   ],
   providers: [
     AuthService,
+    LanguageService,
     PostService,
     GroupService,
     UserService,
     ConfigService,
+    { provide: LOCALE_ID, useValue: 'he-IL' },
     {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]

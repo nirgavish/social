@@ -16,8 +16,8 @@ class UserControllerClass {
     ];
 
     public async followUnfollow(req: Request, res: Response) {
-        if (req.user.isLoggedIn) {
-            const followConnection = {follower: req.user.id, following: req.params.id };
+        if (req["user"].isLoggedIn) {
+            const followConnection = {follower: req["user"].id, following: req.params.id };
             const connection = await Repo(Follow).findOne(followConnection);
             try {
                 if (!connection && req.method === "POST") { await Repo(Follow).save(followConnection); }
@@ -32,7 +32,7 @@ class UserControllerClass {
     }
 
     public async feed(req: Request, res: Response) {
-        if (process.env.walledGarden && !req.user.isLoggedIn) {
+        if (process.env.walledGarden && !req["user"].isLoggedIn) {
             res.status(401).send();
             return;
         }
@@ -51,7 +51,7 @@ class UserControllerClass {
     }
 
     public async get(req: Request, res: Response) {
-        if (process.env.walledGarden && !req.user.isLoggedIn) {
+        if (process.env.walledGarden && !req["user"].isLoggedIn) {
             res.status(401).send();
             return;
         }
@@ -59,8 +59,8 @@ class UserControllerClass {
         if (user) {
             user.followerCount = await Repo(Follow).count({where: {following: user.id}});
             user.followingCount = await Repo(Follow).count({where: {follower: user.id}});
-            if (req.user.isLoggedIn) {
-                const follower = req.user.id;
+            if (req["user"].isLoggedIn) {
+                const follower = req["user"].id;
                 const following = req.params.id;
 
                 const connection = await Repo(Follow).findOne({follower, following });
@@ -73,7 +73,7 @@ class UserControllerClass {
     }
 
     public async list(req: Request, res: Response) {
-        if (req.user.role === UserRoles.ADMIN) {
+        if (req["user"].role === UserRoles.ADMIN) {
             res.json(await Repo(User).find());
         } else {
             res.status(403).send();
@@ -81,11 +81,11 @@ class UserControllerClass {
     }
 
     public async post(req: Request, res: Response) {
-        if (process.env.walledGarden && !req.user.isLoggedIn) {
+        if (process.env.walledGarden && !req["user"].isLoggedIn) {
             res.status(401).send();
             return;
         }
-        if (!(req.user.role === UserRoles.ADMIN)) { req.body.role = UserRoles.MEMBER; } // Only Admins can create other Admins
+        if (!(req["user"].role === UserRoles.ADMIN)) { req.body.role = UserRoles.MEMBER; } // Only Admins can create other Admins
         try {
             const newUser = await Repo(User).create(req.body);
             await Repo(User).save(newUser);
@@ -96,8 +96,8 @@ class UserControllerClass {
     }
 
     public async patch(req: Request, res: Response) {
-        if (req.user.role === UserRoles.ADMIN || req.user.id === req.params.id) {
-            if (req.user.role !== UserRoles.ADMIN) { req.body.role = UserRoles.MEMBER; } // Only Admins can change others to Admin
+        if (req["user"].role === UserRoles.ADMIN || req["user"].id === req.params.id) {
+            if (req["user"].role !== UserRoles.ADMIN) { req.body.role = UserRoles.MEMBER; } // Only Admins can change others to Admin
             try {
                 await Repo(User).update(req.body.id, req.body);
                 res.status(200).send();
@@ -110,7 +110,7 @@ class UserControllerClass {
     }
 
     public async delete(req: Request, res: Response) {
-        if (req.user.role === UserRoles.ADMIN || req.user.id === req.params.id) {
+        if (req["user"].role === UserRoles.ADMIN || req["user"].id === req.params.id) {
             await Repo(User).delete(req.params.id);
             res.status(200).send();
         } else {

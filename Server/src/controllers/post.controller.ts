@@ -11,6 +11,7 @@ class PostControllerClass {
         {path: ":id/comments", method: "get", functionName: "getComments"},
         {path: ":id/comment", method: "post", functionName: "addComment"},
         {path: ":id/comment/:commentId", method: "delete", functionName: "deleteComment"},
+        {path: ":id/unfollow", method: "post", functionName: "unfollow"},
     ];
 
     public async get(req: Request, res: Response) {
@@ -29,7 +30,7 @@ class PostControllerClass {
         const notifications = await Repo(Notification).find({
             order: {dateModified: "DESC"},
             relations: ["post", "post.user", "post.lastComment", "post.lastComment.user", "post.group"],
-            where: {recipient: req.user.id},
+            where: {recipient: req["user"].id},
         });
 
         notifications.forEach((notification) => {
@@ -42,11 +43,15 @@ class PostControllerClass {
         res.json(posts);
     }
 
+    public async unfollow(req: Request, res: Response) {
+        // TODO: Implement unfollow: Allow users to delete their own notification(s)
+    }
+
     public async post(req: Request, res: Response) {
         // TODO: Post should allow only group IDs the user is a member of
-        if (req.user.isLoggedIn) {
+        if (req["user"].isLoggedIn) {
             const newPost = req.body;
-            newPost.user = req.user.id;
+            newPost["user"] = req["user"].id;
             newPost.dateCreated = new Date();
             newPost.commentCount = 0;
 
@@ -64,7 +69,7 @@ class PostControllerClass {
     public async patch(req: Request, res: Response) {
         // owner & admin
         const post = await Repo(Post).findOne({id: req.body.id}, {relations: ["user", "lastComment"]});
-        if (req.user.role === UserRoles.ADMIN || post.user.id === req.user.id) {
+        if (req["user"].role === UserRoles.ADMIN || post.user.id === req["user"].id) {
             try {
                 await Repo(Post).update(req.body.id, req.body);
                 res.status(200).send();
@@ -79,8 +84,8 @@ class PostControllerClass {
     public async delete(req: Request, res: Response) {
         // owner & admin
         const post = await Repo(Post).findOne({id: req.params.id}, {relations: ["user"]});
-        console.log({a: req.user.role, b: UserRoles.ADMIN, c: post.user.id, d: req.user.id});
-        if (req.user.role === UserRoles.ADMIN || post.user.id === req.user.id) {
+        console.log({a: req["user"].role, b: UserRoles.ADMIN, c: post.user.id, d: req["user"].id});
+        if (req["user"].role === UserRoles.ADMIN || post.user.id === req["user"].id) {
             try {
                 await Repo(Post).delete(req.params.id);
                 res.status(200).send();
@@ -117,7 +122,7 @@ class PostControllerClass {
 
             const newComment = Repo(Comment).create({
                 body: req.body.body,
-                user: req.user.id,
+                user: req["user"].id,
                 post: req.params.id,
             });
 
@@ -146,7 +151,7 @@ class PostControllerClass {
         const post = await Repo(Post).findOne({id: req.params.id}, {relations: ["user", "lastComment"]});
         const comment = await Repo(Comment).findOne({id: req.params.commentId}, {relations: ["user"]});
 
-        if (req.user.role === UserRoles.ADMIN || comment.user.id === req.user.id) {
+        if (req["user"].role === UserRoles.ADMIN || comment.user.id === req["user"].id) {
             try {
                 post.lastComment = null;
                 await Repo(Post).update(req.params.id, post);
