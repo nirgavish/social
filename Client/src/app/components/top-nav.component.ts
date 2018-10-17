@@ -34,7 +34,7 @@ import {LanguageService} from "../services/language.service";
                 <b>{{authService.identity.name}}</b>
               </button>
               <div class="dropdown-menu">
-                <a (click)="logout()" class="dropdown-item" href="javascript:;">Logout</a>
+                <a (click)="logout()" class="dropdown-item" href="javascript:;">{{L('Logout')}}</a>
               </div>
             </div>
           </ng-container>

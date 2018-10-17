@@ -2,7 +2,7 @@ import {ApplicationRef, Component, Input, OnInit} from '@angular/core';
 import {ChangeDetectorRef} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {PostService} from '../services/post.service';
-import {LanguageService} from "../services/language.service";
+import {LanguageService} from '../services/language.service';
 
 @Component({
   selector: 'app-post',
@@ -19,7 +19,7 @@ import {LanguageService} from "../services/language.service";
               <button type="button" class="btn btn-xs btn-primary dropdown-toggle"
                       data-toggle="dropdown"></button>
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="javascript:;" (click)="deletePost()">Delete</a>
+                <a class="dropdown-item" href="javascript:;" (click)="deletePost()">{{L('Delete')}}</a>
               </div>
             </div>
           </div>
