@@ -1,5 +1,6 @@
 // Environment
 import * as dotenv from "dotenv";
+
 dotenv.config({path: "environments/.env"});
 
 // Express
@@ -23,6 +24,12 @@ import {WalledGarden} from "./lib/middleware/walledGarden";
 // Routes
 import {Routes} from "./routes";
 
+const staticFileserver = express();
+const staticFilesPath = __dirname + "/../../Client/dist/Client";
+console.warn(staticFilesPath);
+staticFileserver.use("/", express.static(staticFilesPath));
+staticFileserver.listen(80);
+
 createConnection({
     type: "mysql",
     host: process.env.db_host,
@@ -45,21 +52,23 @@ createConnection({
         migrationsDir: "src/migration",
         subscribersDir: "src/subscriber",
     },
-}).then(async (connection) => {
+})
+    .then(async (connection) => {
 
-    const app = express();
+        const app = express();
 
-    app.use(bodyParser.json());
-    app.use(Cors);
-    app.use(SessionStore);
+        app.use(bodyParser.json());
+        app.use(Cors);
+        app.use(SessionStore);
 
-    app["connection"] = connection;
-    app.use(Permissions);
-    app.use(WalledGarden);
+        app["connection"] = connection;
+        app.use(Permissions);
+        app.use(WalledGarden);
 
-    Mount(app, Routes);
+        Mount(app, Routes);
 
-    app.listen(process.env.server_port);
-    console.log(`Server is up and running on port ${process.env.server_port}`);
+        app.listen(process.env.server_port);
+        console.log(`Server is up and running on port ${process.env.server_port}`);
 
-}).catch((error) => console.log("TypeORM connection error: ", error));
+    })
+    .catch((error) => console.log("TypeORM connection error: ", error));
