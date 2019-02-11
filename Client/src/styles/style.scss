@@ -1,5 +1,6 @@
-@import 'bootstrap.yeti.rtl.css';
-/*@import 'bootstrap.yeti.css';*/
+// https://github.com/MahdiMajidzadeh/bootstrap-v4-rtl/tree/v4/scss
+@import './theme-rtl/bootstrap-rtl.scss';
+
 
 @import 'customizations/general';
 @import 'customizations/images';

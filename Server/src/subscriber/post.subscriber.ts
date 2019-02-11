@@ -1,9 +1,10 @@
 import {EntitySubscriberInterface, EventSubscriber, InsertEvent} from "typeorm";
-import {Follow} from "../entity/Follow";
-import {Member} from "../entity/Member";
-import {ActivityType, Notification} from "../entity/Notification";
+// import {Follow} from "../entity/Follow";
+// import {Member} from "../entity/Member";
+import {ActivityType} from "../entity/Notification"; // , Notification
 import {Post} from "../entity/Post";
-import {Repo} from "../lib/repos";
+// import {Repo} from "../lib/repos";
+import {NotificationService} from "../service/notification.service";
 
 @EventSubscriber()
 export class PostSubscriber implements EntitySubscriberInterface<Post> {
@@ -17,6 +18,8 @@ export class PostSubscriber implements EntitySubscriberInterface<Post> {
             const post = event.entity;
             if (post.group) {
                 // Publish to group members
+                NotificationService.notify_group_members(post.group, post.user, ActivityType.PUBLISHED, post);
+                /*
                 const members = await Repo(Member).find({where: {group: post.group}, relations: ["user"]});
                 const messages = [];
 
@@ -33,9 +36,11 @@ export class PostSubscriber implements EntitySubscriberInterface<Post> {
                 });
 
                 Repo(Notification).save(messages);
-
+                */
             } else {
                 // Publish to user followers
+                NotificationService.notify_followers(post.user, ActivityType.PUBLISHED, post);
+                /*
                 const followers = await Repo(Follow).find({where: {following: post.user}, relations: ["follower"]});
                 const messages = [];
 
@@ -60,6 +65,7 @@ export class PostSubscriber implements EntitySubscriberInterface<Post> {
                 });
 
                 Repo(Notification).save(messages);
+                */
             }
 
             resolve(event);

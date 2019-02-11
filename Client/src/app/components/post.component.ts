@@ -11,33 +11,57 @@ import {LanguageService} from '../services/language.service';
 
       <div class="media">
 
-        <app-user-avatar class="mr-3 img-sz-4" [user]="post.user"></app-user-avatar>
+        <app-user-avatar class="mr-3 img-sz-3" [user]="post.user"></app-user-avatar>
         <div class="media-body">
 
-          <div *ngIf="authService.identity && (post.user.id===authService.identity.id)" class="float-right">
+          <div *ngIf="authService.identity && (post.user.id===authService.identity.id)" class="float-left">
             <div class="dropdown">
               <button type="button" class="btn btn-xs btn-primary dropdown-toggle"
                       data-toggle="dropdown"></button>
-              <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-menu dropdown-menu-left">
                 <a class="dropdown-item" href="javascript:;" (click)="deletePost()">{{L('Delete')}}</a>
               </div>
             </div>
           </div>
 
-          <a class="small font-weight-bold" [routerLink]="['/user/'+post.user.id]">{{post.user.name}}</a>
-          <span class="small" *ngIf="post.group">
-          <i class="fa fa-caret-right mr-1 ml-1"></i>
-          <a href="javascript:;" [routerLink]="['/group/'+post.group.id]">{{post.group.name}}</a>
-        </span>
+          <h6 class="mt-0 mb-0">
+            <a class="small font-weight-bold" [routerLink]="['/user/'+post.user.id]">
+              {{post.user.name}}
+            </a>
 
-          <a [routerLink]="['/post/' + post.id]">
-            <div title="{{post.dateCreated | date}}" class="small text-muted">{{post.dateCreated | timeAgo}}</div>
-          </a>
+            <span class="small" *ngIf="post.group">
+                <i class="fa fa-caret-right mr-1 ml-1"></i>
+                <a href="javascript:;" [routerLink]="['/group/'+post.group.id]">{{post.group.name}}</a>
+            </span>
+          </h6>
+          <h6 class="mt-0 text-muted">
+            <a [routerLink]="['/post/' + post.id]">
+              <small class="text-muted">
+                <time title="{{post.dateCreated | date}}">{{post.dateCreated | timeAgo}}</time>
+              </small>
+            </a>
+          </h6>
 
           <div>
             <span [innerHTML]="postBody()"></span>
-            <a class="text-nowrap small" href="javascript:;" (click)="extendTextView()" *ngIf="!postPageMode && post.body.length>200"> {{L('Read More')}}...</a>
+            <a class="text-nowrap small" href="javascript:;" (click)="extendTextView()"
+               *ngIf="!postPageMode && post.body.length>200"> {{L('Read More')}}...</a>
           </div>
+
+
+          <div class="row mt-3">
+            <div class="col-6">
+              <a class="btn btn-sm btn-outline-info" href="javascript:;">
+                <i class="fa fa-thumbs-up fa-flip-horizontal mr-2"></i>
+                <span class="small">2,312</span>
+              </a>
+            </div>
+            <div class="col-6 text-right">
+              <a href="javascript:;">25 תגובות</a>
+            </div>
+          </div>
+
+          <hr/>
 
           <ng-container *ngIf="!post.comments; else fullComments">
             <div *ngIf="post.commentCount>1" class="mt-3 small">
@@ -89,7 +113,7 @@ export class PostComponent implements OnInit {
   }
 
   postBody() {
-    if ( this.postPageMode || this.post.body.length < 200) {
+    if (this.postPageMode || this.post.body.length < 200) {
       return this.post.body;
     } else {
       const tmp = document.createElement('DIV');

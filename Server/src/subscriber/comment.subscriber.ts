@@ -3,6 +3,7 @@ import {Comment} from "../entity/Comment";
 import {ActivityType, Notification} from "../entity/Notification";
 import {Post} from "../entity/Post";
 import {Repo} from "../lib/repos";
+import {NotificationService} from "../service/notification.service";
 
 @EventSubscriber()
 export class PostSubscriber implements EntitySubscriberInterface<Post> {
@@ -12,18 +13,7 @@ export class PostSubscriber implements EntitySubscriberInterface<Post> {
     }
 
     public async afterInsert(event: InsertEvent<Post>) {
-        return new Promise(async (resolve, reject) => {
-
-            const post = event.entity["post"];
-
-            const partialUpdate = {};
-            partialUpdate["subject"] = event.entity["user"];
-            partialUpdate["activity"] = ActivityType.COMMENTED_ON;
-
-            // TODO: Create notification for posting user if one does not exist
-            Repo(Notification).update({post}, {...partialUpdate});
-            resolve();
-        });
+        NotificationService.notify_post_followers(event.entity["user"], ActivityType.COMMENTED_ON, event.entity["post"]);
     }
 
 }

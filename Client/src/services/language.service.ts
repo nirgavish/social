@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {he} from './languages/he.language';
-import {environment} from '../../environments/environment';
+import {environment} from '../environments/environment';
 
 const allLanguages = {
   he,

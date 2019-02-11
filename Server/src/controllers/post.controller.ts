@@ -26,11 +26,39 @@ class PostControllerClass {
     }
 
     public async list(req: Request, res: Response) {
+        const notifications = await Repo(Notification).createQueryBuilder()
+            .select("MAX (dateCreated) as dateCreated, postId")
+            .groupBy("postId")
+            .where(`recipientId = "${req["user"].id}"`)
+            .orderBy("dateCreated", "DESC")
+            .execute();
+
+        const posts = await Repo(Post).findByIds(
+            notifications.map((n) => n.postId),
+            {
+                order: {dateModified: "DESC"},
+                relations: ["user", "lastComment", "lastComment.user", "group"],
+                where: {recipient: req["user"].id},
+                // take: 3,
+            },
+        );
+
+        posts.forEach((p) => {
+            p.user = User.stripBeforeSend(p.user);
+            if (p.lastComment) {p.lastComment.user = User.stripBeforeSend(p.lastComment.user); }
+        });
+
+        res.json(posts);
+    }
+
+    /*
+    public async _list(req: Request, res: Response) {
         // TODO: Paging
         const notifications = await Repo(Notification).find({
             order: {dateModified: "DESC"},
             relations: ["post", "post.user", "post.lastComment", "post.lastComment.user", "post.group"],
             where: {recipient: req["user"].id},
+            take: 3,
         });
 
         notifications.forEach((notification) => {
@@ -42,9 +70,10 @@ class PostControllerClass {
 
         res.json(posts);
     }
+    */
 
     public async unfollow(req: Request, res: Response) {
-        // TODO: Implement unfollow: Allow users to delete their own notification(s)
+        // TODO: Implement unfollow
     }
 
     public async post(req: Request, res: Response) {
