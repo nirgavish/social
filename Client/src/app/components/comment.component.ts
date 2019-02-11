@@ -18,7 +18,7 @@ import {PostService} from '../services/post.service';
         <div class="dropdown">
           <button type="button" class="btn btn-xs btn-primary dropdown-toggle float-right"
                   data-toggle="dropdown"></button>
-          <div class="dropdown-menu dropdown-menu-right">
+          <div class="dropdown-menu dropdown-menu-left">
             <a class="dropdown-item" href="javascript:;" (click)="deleteComment(comment.id)">Delete</a>
           </div>
         </div>

@@ -30,7 +30,7 @@ import {LanguageService} from "../services/language.service";
           <ng-container *ngIf="authService.isLoggedIn; else loginWidget">
             <div class="dropdown">
               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                <app-user-avatar class="ml-1 mr-1 img-sz-1" [user]="authService.identity" [link]="false"></app-user-avatar>
+                <app-user-avatar class="mr-1 img-sz-1" [user]="authService.identity" [link]="false"></app-user-avatar>
                 <b>{{authService.identity.name}}</b>
               </button>
               <div class="dropdown-menu">

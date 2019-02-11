@@ -57,18 +57,23 @@ import {LanguageService} from '../services/language.service';
               </a>
             </div>
             <div class="col-6 text-right">
-              <a href="javascript:;">25 תגובות</a>
+              <a href="javascript:;" (click)="showComments()" href="javascript:;">
+                <ng-container *ngIf="post.commentCount!==1; else oneComment">{{post.commentCount}} {{L('Comments')}}</ng-container>
+                <ng-template #oneComment>{{L('One Comment')}}</ng-template>
+              </a>
             </div>
           </div>
 
           <hr/>
 
           <ng-container *ngIf="!post.comments; else fullComments">
+<!--
             <div *ngIf="post.commentCount>1" class="mt-3 small">
               <a href="javascript:;" (click)="showComments()">
                 {{post.commentCount - 1}} More Comment<span *ngIf="post.commentCount>2">s</span>...
               </a>
             </div>
+-->
             <app-comment *ngIf="post.lastComment" [post]="post" (deleteEvent)="refreshPost()"
                          [comment]="post.lastComment"></app-comment>
           </ng-container>

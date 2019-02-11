@@ -13,6 +13,8 @@ export const he = {
   'Logout': 'יציאה',
   'Delete': 'מחיקה',
   'Read More': 'עוד' ,
-  'Login to comment': 'יש להכנס כדי להגיב'
+  'Login to comment': 'יש להכנס כדי להגיב',
+  'One Comment': 'תגובה אחת',
+  'Comments': 'תגובות'
 };
 
